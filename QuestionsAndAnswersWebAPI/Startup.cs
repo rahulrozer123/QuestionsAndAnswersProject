@@ -32,11 +32,15 @@ namespace QuestionsAndAnswersWebAPI
 
             services.AddControllers();
             services.AddDbContext<QuestionsAndAnswersContext>(op => op.UseSqlServer(Configuration.GetConnectionString("Myconnection")));
+            services.AddDbContext<TechnologyContext>(op => op.UseSqlServer(Configuration.GetConnectionString("Myconnection")));
+            services.AddDbContext<RegistrationContext>(op => op.UseSqlServer(Configuration.GetConnectionString("Myconnection")));
             services.AddScoped<IQuestionAndAnswerService, QuestionAndAnswerService>();
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "QuestionsAndAnswersWebAPI", Version = "v1" });
-            //});
+            services.AddScoped<ITechnologyService, TechnologyService>();
+            services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "QuestionsAndAnswersWebAPI", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,8 +49,8 @@ namespace QuestionsAndAnswersWebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuestionsAndAnswersWebAPI v1"));
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuestionsAndAnswersWebAPI v1"));
             }
 
             app.UseHttpsRedirection();

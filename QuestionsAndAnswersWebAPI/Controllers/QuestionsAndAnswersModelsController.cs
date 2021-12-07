@@ -16,9 +16,11 @@ namespace QuestionsAndAnswersWebAPI.Controllers
     public class QuestionsAndAnswersModelsController : ControllerBase
     {       
         private readonly IQuestionAndAnswerService _service;
+        
         public QuestionsAndAnswersModelsController(IQuestionAndAnswerService service)
         {         
             _service = service;
+            
         }
 
         //GET: api/QuestionsAndAnswersModels
@@ -26,6 +28,10 @@ namespace QuestionsAndAnswersWebAPI.Controllers
         public  IActionResult GetQuestionAndAnswer()
         {            
            var questionAndAnswers = _service.GetAllQuestionsAndAnswers();
+            if(questionAndAnswers == null)
+            {
+                return BadRequest();
+            }
             return Ok(questionAndAnswers);
         }
 
@@ -58,26 +64,22 @@ namespace QuestionsAndAnswersWebAPI.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //Used to update the entries by id
         [HttpPut("{id}")]
-        public IActionResult PutQuestionsAndAnswersModel(int id, QuestionsAndAnswersModel questionsAndAnswersModel)
+        public IActionResult PutQuestionsAndAnswersModel(QuestionsAndAnswersModel questionsAndAnswersModel)
         {                     
             try
             {
-                _service.Update(id, questionsAndAnswersModel);
+                _service.Update(questionsAndAnswersModel);
                 return Ok();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (id != questionsAndAnswersModel.QuestionID)
-                {
-                    return BadRequest();
-                }
-            }
-            return NoContent();
+                return NotFound();                
+            }            
         }
 
         // POST: api/QuestionsAndAnswersModels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-       // [HttpPost]
+        // [HttpPost]
         //Used to add data to db
         //public IActionResult PostQuestionsAndAnswersModel([FromBody] QuestionsAndAnswersModel questionsAndAnswersModel)
         //{
@@ -91,7 +93,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
         //    {
         //        return NotFound();
         //    }
-        //    return CreatedAtAction("Get", new { id = item.QuestionID }, item);
+        //    return Ok();
         //}
 
         // DELETE: api/QuestionsAndAnswersModels/5
@@ -107,5 +109,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
         //{
         //    return _context.QuestionAndAnswer.Any(e => e.QuestionID == id);
         //}
+        //GET: api/QuestionsAndAnswersModels
+        
     }
 }

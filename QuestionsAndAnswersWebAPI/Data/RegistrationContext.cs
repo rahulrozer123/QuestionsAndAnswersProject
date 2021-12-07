@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace QuestionsAndAnswersWebAPI.Data
 {
-    public class QuestionsAndAnswersContext :DbContext
+    public class RegistrationContext : DbContext
     {
-        public QuestionsAndAnswersContext(DbContextOptions<QuestionsAndAnswersContext> options)
+        public RegistrationContext(DbContextOptions<RegistrationContext> options)
             : base(options)
         {
+
         }
 
-        public DbSet<QuestionsAndAnswersModel> QuestionandAnswer { get; set; }
-
-       
+        public DbSet<RegistrationModel> UserRegistration { get; set; }
     }
 }

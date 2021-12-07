@@ -14,6 +14,7 @@ namespace QuestionsAndAnswersWebAPI.Services
     {
         private readonly QuestionsAndAnswersContext _context;
 
+
         public QuestionAndAnswerService(QuestionsAndAnswersContext context)
         {
             _context = context;
@@ -50,7 +51,17 @@ namespace QuestionsAndAnswersWebAPI.Services
 
         //public QuestionsAndAnswersModel Add(QuestionsAndAnswersModel questionsAndAnswersModel)
         //{
-        //    _context.QuestionAndAnswer.Add(questionsAndAnswersModel);
+        //    _context.QuestionandAnswer.Add(new QuestionsAndAnswersModel()
+        //    {
+        //        QuestionID = questionsAndAnswersModel.QuestionID,
+        //        TechnologyId = questionsAndAnswersModel.TechnologyId,
+        //        Question = questionsAndAnswersModel.Question,
+        //        Option1 = questionsAndAnswersModel.Option1,
+        //        Option2 = questionsAndAnswersModel.Option2,
+        //        Option3 = questionsAndAnswersModel.Option3,
+        //        Option4 = questionsAndAnswersModel.Option4,
+        //        ActualAnswer = questionsAndAnswersModel.ActualAnswer
+        //    });
         //    _context.SaveChanges();
 
         //    return questionsAndAnswersModel;
@@ -67,16 +78,20 @@ namespace QuestionsAndAnswersWebAPI.Services
         //    _context.SaveChanges();           
         //}
 
-        public void Update(int id, QuestionsAndAnswersModel questionsAndAnswersModel)
+        public void Update(QuestionsAndAnswersModel questionsAndAnswersModel)
         {
-            var entity = _context.QuestionandAnswer.FirstOrDefault(e => e.QuestionID == id);
-            entity.Question = questionsAndAnswersModel.Question;
-            entity.Option1 = questionsAndAnswersModel.Option1;
-            entity.Option2 = questionsAndAnswersModel.Option2;
-            entity.Option3 = questionsAndAnswersModel.Option3;
-            entity.Option4 = questionsAndAnswersModel.Option4;
-            entity.ActualAnswer = questionsAndAnswersModel.ActualAnswer;
-            _context.SaveChanges();
-        }        
+            var entity = _context.QuestionandAnswer.Where(e => e.QuestionID == questionsAndAnswersModel.QuestionID).FirstOrDefault();
+            if (entity != null)
+            {
+                entity.Question = questionsAndAnswersModel.Question;
+                entity.TechnologyId = questionsAndAnswersModel.TechnologyId;
+                entity.Option1 = questionsAndAnswersModel.Option1;
+                entity.Option2 = questionsAndAnswersModel.Option2;
+                entity.Option3 = questionsAndAnswersModel.Option3;
+                entity.Option4 = questionsAndAnswersModel.Option4;
+                entity.ActualAnswer = questionsAndAnswersModel.ActualAnswer;
+                _context.SaveChanges();
+            }
+        }
     }
 }

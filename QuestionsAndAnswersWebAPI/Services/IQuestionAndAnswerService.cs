@@ -23,6 +23,8 @@ namespace QuestionsAndAnswersWebAPI.Services
         //void Delete(int id);
 
         //Updates the data by speciying the ID
-        void Update(int id, QuestionsAndAnswersModel questionsAndAnswersModel);
+        void Update(QuestionsAndAnswersModel questionsAndAnswersModel);
+
+       
     }
 }

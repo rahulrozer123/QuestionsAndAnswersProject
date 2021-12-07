@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace QuestionsAndAnswersWebAPI.Data
 {
-    public class QuestionsAndAnswersContext :DbContext
+    public class TechnologyContext : DbContext
     {
-        public QuestionsAndAnswersContext(DbContextOptions<QuestionsAndAnswersContext> options)
+        public TechnologyContext(DbContextOptions<TechnologyContext> options)
             : base(options)
         {
+
         }
 
-        public DbSet<QuestionsAndAnswersModel> QuestionandAnswer { get; set; }
-
-       
+        public DbSet<TechnologyModel> MasterTechnology { get; set; }
     }
 }
