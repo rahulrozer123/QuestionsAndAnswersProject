@@ -1,0 +1,58 @@
+﻿@model QuestionsAndAnswersProject.Models.RegistrationModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h1>User Registration Form @*in asp.net core mvc application*@</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-9">
+        <form asp-action="Registration">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group ">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" placeholder="Username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pwd" class="control-label"></label>
+                <input asp-for="Pwd" class="form-control" type="password" placeholder="password" />
+                <span asp-validation-for="Pwd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Confirmpwd" class="control-label"></label>
+                <input asp-for="Confirmpwd" class="form-control" type="password" placeholder="confirm password should be same as password" />
+                <span asp-validation-for="Confirmpwd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="xxxxxx@gmail.com" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YearsOfExperience" class="control-label"></label>
+                <input asp-for="YearsOfExperience" class="form-control" placeholder="Please enter the experience if worked already and if fresher enter 0" />
+                <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Technology" class="control-label"></label>
+                <input asp-for="Technology" class="form-control" placeholder="Please enter the technology to which you are familiar" />
+                <span asp-validation-for="Technology" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </div>
+            <b>@ViewBag.message</b>
+        </form>
+    </div>
+</div>
+
+@*<div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
