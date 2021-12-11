@@ -34,9 +34,11 @@ namespace QuestionsAndAnswersWebAPI
             services.AddDbContext<QuestionsAndAnswersContext>(op => op.UseSqlServer(Configuration.GetConnectionString("Myconnection")));
             services.AddDbContext<TechnologyContext>(op => op.UseSqlServer(Configuration.GetConnectionString("Myconnection")));
             services.AddDbContext<RegistrationContext>(op => op.UseSqlServer(Configuration.GetConnectionString("Myconnection")));
+            services.AddDbContext<AnswersContext>(op => op.UseSqlServer(Configuration.GetConnectionString("Myconnection")));
             services.AddScoped<IQuestionAndAnswerService, QuestionAndAnswerService>();
             services.AddScoped<ITechnologyService, TechnologyService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<IAnswersService,AnswersService>();
             
             services.AddSwaggerGen(c =>
             {

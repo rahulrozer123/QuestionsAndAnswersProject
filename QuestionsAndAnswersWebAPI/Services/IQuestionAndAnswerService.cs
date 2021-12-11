@@ -13,7 +13,7 @@ namespace QuestionsAndAnswersWebAPI.Services
 
         //Get the questions and other data  by specifying the ID
         //QuestionsAndAnswersModel GetById(int id);
-        List<QuestionsAndAnswersModel> GetByTechnologyId(int id);
+        List<QuestionsAndAnswersModel> GetQuestionsByTechnologyId(int technologyId);
 
         //Add the questions and related data to db
         //it is similar to post operation

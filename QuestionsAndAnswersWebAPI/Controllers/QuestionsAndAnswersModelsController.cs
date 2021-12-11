@@ -52,7 +52,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
         [HttpGet("{TechnologyId}")]
         public IActionResult GetTechnologyModel(int id)
         {
-            var technologyModel = _service.GetByTechnologyId(id);
+            var technologyModel = _service.GetQuestionsByTechnologyId(id);
             if (technologyModel == null)
             {
                 return NotFound();

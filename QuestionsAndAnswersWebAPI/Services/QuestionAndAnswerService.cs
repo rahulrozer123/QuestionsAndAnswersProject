@@ -30,10 +30,10 @@ namespace QuestionsAndAnswersWebAPI.Services
         //    return questionsAndAnswersModel;
         //}
 
-        public List<QuestionsAndAnswersModel> GetByTechnologyId(int id)
+        public List<QuestionsAndAnswersModel> GetQuestionsByTechnologyId(int technologyId)
         {
             var technologyModel = _context.QuestionandAnswer
-                .Where(f => f.TechnologyId == id)
+                .Where(f => f.TechnologyId == technologyId)
                 .Select(f => new QuestionsAndAnswersModel
                 {
                     Question = f.Question,
