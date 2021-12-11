@@ -22,7 +22,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
 
         //GET: api/RegistraionModels
         [HttpGet]
-        public IActionResult GetQuestionAndAnswer()
+        public IActionResult GetAllRegisteredUsers()
         {
             var registrations = _service.GetAllRegistrations();
             if(registrations == null)
@@ -36,7 +36,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         //Used to add data to db
-        public IActionResult PostQuestionsAndAnswersModel([FromBody] RegistrationModel registrationModel)
+        public IActionResult AddNewRegistrations([FromBody] RegistrationModel registrationModel)
         {
             if (!ModelState.IsValid)
             {

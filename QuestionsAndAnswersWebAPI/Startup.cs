@@ -37,6 +37,7 @@ namespace QuestionsAndAnswersWebAPI
             services.AddScoped<IQuestionAndAnswerService, QuestionAndAnswerService>();
             services.AddScoped<ITechnologyService, TechnologyService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "QuestionsAndAnswersWebAPI", Version = "v1" });
