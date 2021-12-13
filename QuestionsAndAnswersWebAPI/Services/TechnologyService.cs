@@ -1,4 +1,5 @@
-﻿using QuestionsAndAnswersWebAPI.Data;
+﻿using QuestionsAndAnswersDBContext.Models;
+using QuestionsAndAnswersDBContext.Services;
 using QuestionsAndAnswersWebAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -9,15 +10,20 @@ namespace QuestionsAndAnswersWebAPI.Services
 {
     public class TechnologyService : ITechnologyService
     {
-        private readonly TechnologyContext _technologyContext;
+        private readonly ITechnologyDBService _technologyContext;
 
-        public TechnologyService(TechnologyContext technologyContext)
+        public TechnologyService(ITechnologyDBService technologyContext)
         {
             _technologyContext = technologyContext;
         }
         public IEnumerable<TechnologyModel> GetAllTechnologies()
         {
-            return _technologyContext.MasterTechnology.ToList();
-        }
+            var data = _technologyContext.GetAllTechnologies()
+                 .Select(f => new TechnologyModel()
+                 {
+                    TechnologyName = f.TechnologyName
+                 }) ;
+            return data;
+        } 
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuestionsAndAnswersWebAPI.Data;
+using QuestionsAndAnswersDBContext.Models;
 using QuestionsAndAnswersWebAPI.Models;
 using QuestionsAndAnswersWebAPI.Services;
 
@@ -14,21 +14,21 @@ namespace QuestionsAndAnswersWebAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class QuestionsAndAnswersModelsController : ControllerBase
-    {       
+    {
         private readonly IQuestionAndAnswerService _service;
-        
+
         public QuestionsAndAnswersModelsController(IQuestionAndAnswerService service)
-        {         
+        {
             _service = service;
-            
         }
 
         //GET: api/QuestionsAndAnswersModels
-       [HttpGet]
-        public  IActionResult GetQuestionAndAnswer()
-        {            
-           var questionAndAnswers = _service.GetAllQuestionsAndAnswers();
-            if(questionAndAnswers == null)
+        [HttpGet]
+        [Route("Get all the questions and options")]
+        public IActionResult GetQuestionAndAnswer()
+        {
+            var questionAndAnswers = _service.GetAllQuestionsAndAnswers();
+            if (questionAndAnswers == null)
             {
                 return BadRequest();
             }
@@ -49,7 +49,8 @@ namespace QuestionsAndAnswersWebAPI.Controllers
         //}
 
         //GET: api/TechnologyModels/5
-        [HttpGet("{TechnologyId}")]
+        [HttpGet]
+        [Route("Get questions based on technology id")]
         public IActionResult GetTechnologyModel(int id)
         {
             var technologyModel = _service.GetQuestionsByTechnologyId(id);
@@ -63,8 +64,8 @@ namespace QuestionsAndAnswersWebAPI.Controllers
         // PUT: api/QuestionsAndAnswersModels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //Used to update the entries by id
-        [HttpPut("{id}")]
-        public IActionResult PutQuestionsAndAnswersModel(QuestionsAndAnswersModel questionsAndAnswersModel)
+        [HttpPut("{id}")]        
+        public IActionResult PutQuestionsAndAnswersModel(QuestionsAndAnswers questionsAndAnswersModel)
         {                     
             try
             {

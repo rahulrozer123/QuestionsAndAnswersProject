@@ -1,4 +1,5 @@
-﻿using QuestionsAndAnswersWebAPI.Data;
+﻿using QuestionsAndAnswersDBContext.Models;
+using QuestionsAndAnswersDBContext.Services;
 using QuestionsAndAnswersWebAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -9,32 +10,28 @@ namespace QuestionsAndAnswersWebAPI.Services
 {
     public class RegistrationService : IRegistrationService
     {
-        private readonly RegistrationContext _context;
+        private readonly IRegistrationDBService _dbContext;
 
-        public RegistrationService(RegistrationContext context)
+        public RegistrationService(IRegistrationDBService dbContext)
         {
-            _context = context;
+            _dbContext = dbContext;
         }
 
         public IEnumerable<RegistrationModel> GetAllRegistrations()
         {
-            return _context.UserRegistration.ToList();
+            var data= _dbContext.GetAllRegistrations()
+                .Select(f=> new RegistrationModel()
+                {
+                Username = f.Username,
+                Email = f.Email,
+                YearsOfExperience = f.YearsOfExperience,
+                Technology= f.Technology
+            }).ToList();
+            return data;
         }
-        public RegistrationModel Add(RegistrationModel registrationModel)
+        public Registration Add(Registration registrationModel)
         {
-            _context.UserRegistration.Add(new RegistrationModel()
-            {
-                UserId =registrationModel.UserId,
-                RoleId= registrationModel.RoleId,
-                Username= registrationModel.Username,
-                Pwd=registrationModel.Pwd,
-                ConfirmPassword=registrationModel.ConfirmPassword,
-                Email=registrationModel.Email,
-                YearsOfExperience = registrationModel.YearsOfExperience,
-                Technology = registrationModel.Technology
-            }) ;
-            _context.SaveChanges();
-
+            _dbContext.Add(registrationModel);
             return registrationModel;
         }
     }

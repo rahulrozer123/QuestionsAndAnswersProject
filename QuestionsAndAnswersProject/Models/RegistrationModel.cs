@@ -24,7 +24,7 @@ namespace QuestionsAndAnswersProject.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         [Compare("Pwd")]
-        public string Confirmpwd { get; set; }
+        public string Confirmpassword { get; set; }
 
         [Required(ErrorMessage = "Please Enter Email...")]
         [Display(Name = "Email")]

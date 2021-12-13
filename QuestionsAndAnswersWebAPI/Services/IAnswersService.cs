@@ -1,4 +1,5 @@
-﻿using QuestionsAndAnswersWebAPI.Models;
+﻿using QuestionsAndAnswersDBContext.Models;
+using QuestionsAndAnswersWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace QuestionsAndAnswersWebAPI.Services
 {
     public interface IAnswersService
     {
-        IEnumerable<AnswersModel> GetAllAnswersByID(int id);
+        IEnumerable<Answers> GetAnswersGivenByUser(Answers answers);
     }
 }

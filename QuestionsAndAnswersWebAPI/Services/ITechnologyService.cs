@@ -1,4 +1,5 @@
-﻿using QuestionsAndAnswersWebAPI.Models;
+﻿using QuestionsAndAnswersDBContext.Models;
+using QuestionsAndAnswersWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

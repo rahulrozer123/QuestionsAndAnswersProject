@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionsAndAnswersProject", "QuestionsAndAnswersProject\QuestionsAndAnswersProject.csproj", "{664E0107-78CB-4557-A9DB-12AFFC0EE9FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionsAndAnswersWebAPI", "QuestionsAndAnswersWebAPI\QuestionsAndAnswersWebAPI.csproj", "{DBDA2D49-41FC-42D7-BAA7-B12822D40900}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionsAndAnswersWebAPI", "QuestionsAndAnswersWebAPI\QuestionsAndAnswersWebAPI.csproj", "{DBDA2D49-41FC-42D7-BAA7-B12822D40900}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionsAndAnswersDBContext", "QuestionsAndAnswersDBContext\QuestionsAndAnswersDBContext.csproj", "{1DDF8BFC-22DD-48A3-A5ED-F973C3E6AE36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DBDA2D49-41FC-42D7-BAA7-B12822D40900}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBDA2D49-41FC-42D7-BAA7-B12822D40900}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBDA2D49-41FC-42D7-BAA7-B12822D40900}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DDF8BFC-22DD-48A3-A5ED-F973C3E6AE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DDF8BFC-22DD-48A3-A5ED-F973C3E6AE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DDF8BFC-22DD-48A3-A5ED-F973C3E6AE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DDF8BFC-22DD-48A3-A5ED-F973C3E6AE36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,20 +1,19 @@
 ﻿using QuestionsAndAnswersDBContext.Models;
-using QuestionsAndAnswersWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuestionsAndAnswersWebAPI.Services
+namespace QuestionsAndAnswersDBContext.Services
 {
-    public interface IQuestionAndAnswerService
+    public interface IQuestionAndAnswerDBService
     {
         //Gets all the data from the database
-        IEnumerable<QuestionsAndAnswersModel> GetAllQuestionsAndAnswers();
+        public IEnumerable<QuestionsAndAnswers> GetAllQuestionsAndAnswers();
 
         //Get the questions and other data  by specifying the ID
         //QuestionsAndAnswersModel GetById(int id);
-        IEnumerable<QuestionsAndAnswersModel> GetQuestionsByTechnologyId(int technologyId);
+        public List<QuestionsAndAnswers> GetQuestionsByTechnologyId(int technologyId);
 
         //Add the questions and related data to db
         //it is similar to post operation
@@ -24,7 +23,7 @@ namespace QuestionsAndAnswersWebAPI.Services
         //void Delete(int id);
 
         //Updates the data by speciying the ID
-        void Update(QuestionsAndAnswers questionsAndAnswersModel);
+        public void Update(QuestionsAndAnswers questionsAndAnswersModel);
 
        
     }

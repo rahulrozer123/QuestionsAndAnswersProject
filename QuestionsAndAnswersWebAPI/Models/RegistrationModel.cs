@@ -8,13 +8,10 @@ namespace QuestionsAndAnswersWebAPI.Models
 {
     public class RegistrationModel
     {
-        [Key]
-        public int UserId { get; set; }
-        public int RoleId { get; set; }
-        public string Username { get; set; }
-        public string Pwd { get; set; }
-        public string ConfirmPassword { get; set; }
-
+        //[Key]
+        //public int UserId { get; set; }
+        //public int RoleId { get; set; }
+        public string Username { get; set; }       
         public string Email { get; set; }
         public int YearsOfExperience { get; set; }
         public string Technology { get; set; }

@@ -1,4 +1,5 @@
-﻿using QuestionsAndAnswersWebAPI.Models;
+﻿using QuestionsAndAnswersDBContext.Models;
+using QuestionsAndAnswersWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace QuestionsAndAnswersWebAPI.Services
     public interface IRegistrationService
     {
         IEnumerable<RegistrationModel> GetAllRegistrations();
-        RegistrationModel Add(RegistrationModel registrationModel);
+        Registration Add(Registration registrationModel);
     }
 }

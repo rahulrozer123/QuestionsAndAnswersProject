@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuestionsAndAnswersWebAPI.Models
+namespace QuestionsAndAnswersDBContext.Models
 {
-    public class TechnologyModel
+    public partial class Technology
     {
-        //[Key]
-        //public int TechnologyId { get; set; }
+        [Key]
+        public int TechnologyId { get; set; }
 
         public string TechnologyName { get; set; }
     }

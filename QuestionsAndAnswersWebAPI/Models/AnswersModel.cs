@@ -12,13 +12,7 @@ namespace QuestionsAndAnswersWebAPI.Models
         public int AnswerID { get; set; }
 
         public string ReceivedAnswers { get; set; }
-
-        public bool Result {get;set;}
-
-        public int UserID { get; set; }
-
-        public int TechnologyID { get; set; }
-
+       
         public int QuestionID { get; set; }
     }
 }

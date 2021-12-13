@@ -1,38 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using QuestionsAndAnswersDBContext.Data;
 using QuestionsAndAnswersDBContext.Models;
-using QuestionsAndAnswersDBContext.Services;
-using QuestionsAndAnswersWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace QuestionsAndAnswersWebAPI.Services
+namespace QuestionsAndAnswersDBContext.Services
 {
-    public class QuestionAndAnswerService : IQuestionAndAnswerService
+    public class QuestionAndAnswerDBService : IQuestionAndAnswerDBService
     {
-        private readonly IQuestionAndAnswerDBService _context;
+        private  QuestionsandAnswersDBContext _Dbcontext;
 
 
-        public QuestionAndAnswerService(IQuestionAndAnswerDBService context)
+        public QuestionAndAnswerDBService(QuestionsandAnswersDBContext Dbcontext)
         {
-            _context = context;
+            _Dbcontext = Dbcontext;
         }
-        public IEnumerable<QuestionsAndAnswersModel> GetAllQuestionsAndAnswers()
+        public IEnumerable<QuestionsAndAnswers> GetAllQuestionsAndAnswers()
         {
-            var data = _context.GetAllQuestionsAndAnswers()
-                .Select(f => new QuestionsAndAnswersModel()
+            var questionsAndAnswers = _Dbcontext.QuestionandAnswers
+                .Select(f => new QuestionsAndAnswers
                 {
                     QuestionID = f.QuestionID,
+                    TechnologyId = f.TechnologyId,
                     Question = f.Question,
                     Option1 = f.Option1,
                     Option2 = f.Option2,
                     Option3 = f.Option3,
-                    Option4 = f.Option4
-                });
-            return data;
+                    Option4 = f.Option4,
+                    ActualAnswer = f.ActualAnswer
+                }).ToList();
+
+            return questionsAndAnswers;
         }
 
         //public QuestionsAndAnswersModel GetById(int id)
@@ -41,25 +43,28 @@ namespace QuestionsAndAnswersWebAPI.Services
         //    return questionsAndAnswersModel;
         //}
 
-        public IEnumerable<QuestionsAndAnswersModel> GetQuestionsByTechnologyId(int technologyId)
+        public List<QuestionsAndAnswers> GetQuestionsByTechnologyId(int technologyId)
         {
-            var technologyModel = _context.GetQuestionsByTechnologyId(technologyId)
+            var technologyModel = _Dbcontext.QuestionandAnswers
                 .Where(f => f.TechnologyId == technologyId)
-                .Select(f => new QuestionsAndAnswersModel
+                .Select(f => new QuestionsAndAnswers
                 {
-                    QuestionID = f.QuestionID,
                     Question = f.Question,
+                    TechnologyId = f.TechnologyId,
+                    QuestionID = f.QuestionID,
                     Option1 = f.Option1,
                     Option2 = f.Option2,
                     Option3 = f.Option3,
-                    Option4 = f.Option4
-                });
+                    Option4 = f.Option4,
+                    ActualAnswer = f.ActualAnswer
+                })
+                .ToList();
             return technologyModel;
-        }        
+        }
 
         //public QuestionsAndAnswersModel Add(QuestionsAndAnswersModel questionsAndAnswersModel)
         //{
-        //    _context.QuestionandAnswer.Add(new QuestionsAndAnswersModel()
+        //    _Dbcontext.QuestionandAnswer.Add(new QuestionsAndAnswersModel()
         //    {
         //        QuestionID = questionsAndAnswersModel.QuestionID,
         //        TechnologyId = questionsAndAnswersModel.TechnologyId,
@@ -77,7 +82,7 @@ namespace QuestionsAndAnswersWebAPI.Services
 
         //public void Delete(int id)
         //{           
-        //    var questionsAndAnswersModel = _context.QuestionAndAnswer.FirstOrDefault(e => e.QuestionID == id);
+        //    var questionsAndAnswersModel = _Dbcontext.QuestionAndAnswer.FirstOrDefault(e => e.QuestionID == id);
         //    if (questionsAndAnswersModel == null)
         //    {
         //       return;
@@ -88,7 +93,18 @@ namespace QuestionsAndAnswersWebAPI.Services
 
         public void Update(QuestionsAndAnswers questionsAndAnswersModel)
         {
-            _context.Update(questionsAndAnswersModel);
+            var entity = _Dbcontext.QuestionandAnswers.Where(e => e.QuestionID == questionsAndAnswersModel.QuestionID).FirstOrDefault();
+            if (entity != null)
+            {
+                entity.Question = questionsAndAnswersModel.Question;
+                entity.TechnologyId = questionsAndAnswersModel.TechnologyId;
+                entity.Option1 = questionsAndAnswersModel.Option1;
+                entity.Option2 = questionsAndAnswersModel.Option2;
+                entity.Option3 = questionsAndAnswersModel.Option3;
+                entity.Option4 = questionsAndAnswersModel.Option4;
+                entity.ActualAnswer = questionsAndAnswersModel.ActualAnswer;
+                _Dbcontext.SaveChanges();
+            }
         }
     }
 }

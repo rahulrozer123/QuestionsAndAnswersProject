@@ -10,13 +10,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using QuestionsAndAnswersDBContext.Data;
 using QuestionsAndAnswersDBContext.Services;
-using QuestionsAndAnswersWebAPI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuestionsAndAnswersWebAPI
+namespace QuestionsAndAnswersDBContext
 {
     public class Startup
     {
@@ -31,22 +30,17 @@ namespace QuestionsAndAnswersWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
-            services.AddMvc();                     
-            services.AddTransient<IQuestionAndAnswerService, QuestionAndAnswerService>();
-            services.AddTransient<ITechnologyService, TechnologyService>();
-            services.AddTransient<IRegistrationService, RegistrationService>();
-            services.AddTransient<IAnswersService, AnswersService>();
-            services.AddScoped<IQuestionAndAnswerDBService, QuestionAndAnswerDBService>();
-            services.AddScoped<ITechnologyDBService, TechnologyDBService>();
-            services.AddScoped<IRegistrationDBService, RegistrationDBService>();
-            services.AddScoped<IAnswersDBService, AnswersDBService>();
-            var connectionstring = Configuration.GetConnectionString("Myconnection");
-            services.AddDbContext<QuestionsandAnswersDBContext>(options => options.UseSqlServer(connectionstring));          
+            services.AddControllers();            
+           
+            services.AddTransient<IQuestionAndAnswerDBService, QuestionAndAnswerDBService>();
+            services.AddTransient<ITechnologyDBService, TechnologyDBService>();
+            services.AddTransient<IRegistrationDBService, RegistrationDBService>();
+            services.AddTransient<IAnswersDBService, AnswersDBService>();            
+            services.AddDbContext<QuestionsandAnswersDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Myconnection")));
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "QuestionsAndAnswersWebAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "QuestionsAndAnswersDBContext", Version = "v1" });
             });
         }
 
@@ -57,14 +51,12 @@ namespace QuestionsAndAnswersWebAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuestionsAndAnswersWebAPI v1"));
-            }
-            
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuestionsAndAnswersDBContext v1"));
+            }           
 
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseHttpsRedirection();
 
             app.UseEndpoints(endpoints =>
             {

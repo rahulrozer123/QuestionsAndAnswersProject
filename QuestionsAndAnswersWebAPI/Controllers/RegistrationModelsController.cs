@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using QuestionsAndAnswersDBContext.Models;
 using QuestionsAndAnswersWebAPI.Models;
 using QuestionsAndAnswersWebAPI.Services;
 using System;
@@ -34,9 +35,9 @@ namespace QuestionsAndAnswersWebAPI.Controllers
 
         // POST: api/RegistraionModels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost]        
         //Used to add data to db
-        public IActionResult AddNewRegistrations([FromBody] RegistrationModel registrationModel)
+        public IActionResult AddNewRegistrations([FromBody] Registration registrationModel)
         {
             if (!ModelState.IsValid)
             {

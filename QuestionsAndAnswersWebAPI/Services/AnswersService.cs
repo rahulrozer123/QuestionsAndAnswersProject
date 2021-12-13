@@ -1,4 +1,5 @@
-﻿using QuestionsAndAnswersWebAPI.Data;
+﻿using QuestionsAndAnswersDBContext.Models;
+using QuestionsAndAnswersDBContext.Services;
 using QuestionsAndAnswersWebAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -9,28 +10,17 @@ namespace QuestionsAndAnswersWebAPI.Services
 {
     public class AnswersService : IAnswersService
     {
-        private readonly AnswersContext _context;
+        private readonly IAnswersDBService _context;
 
-        public AnswersService(AnswersContext context)
+        public AnswersService(IAnswersDBService context)
         {
             _context = context;
         }
-        public IEnumerable<AnswersModel> GetAllAnswersByID(int id)
+        public IEnumerable<Answers> GetAnswersGivenByUser(Answers ans)
         {
-            var answersModel = _context.Answers
-                .Where(f => f.TechnologyID == id)
-                .Select(f => new AnswersModel
-                {
-                    AnswerID = f.AnswerID,
-                    ReceivedAnswers = f.ReceivedAnswers,
-                    Result = f.Result,
-                    UserID = f.UserID,
-                    TechnologyID = f.TechnologyID,
-                    QuestionID = f.QuestionID                    
-                })
-                .ToList();
-            return answersModel;
+            var result = _context.GetAnswers(ans);               
+            return result;
         }
-       
+
     }
 }

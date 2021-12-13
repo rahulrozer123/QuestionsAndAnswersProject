@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using QuestionsAndAnswersDBContext.Models;
 using QuestionsAndAnswersWebAPI.Models;
 using QuestionsAndAnswersWebAPI.Services;
 using System;
@@ -20,7 +21,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
             _service = service;
         }
 
-        [HttpPost]
+        [HttpPost]        
         //Used to add data to db
         public IActionResult GetAnswersFromUser([FromBody] AnswersModel answersModel)
         {
@@ -29,7 +30,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var item = _service.GetAllAnswersByID(answersModel.AnswerID);
+            var item = _service.GetAnswersGivenByUser(answersModel);
             if (item == null)
             {
                 return NotFound();
