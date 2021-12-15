@@ -10,6 +10,6 @@ namespace QuestionsAndAnswersWebAPI.Services
     public interface IRegistrationService
     {
         IEnumerable<RegistrationModel> GetAllRegistrations();
-        Registration Add(Registration registrationModel);
+        RegistrationModel Add(RegistrationModel registrationModel);
     }
 }

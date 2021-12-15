@@ -37,8 +37,8 @@ namespace QuestionsAndAnswersDBContext.Services
         {
             _Dbcontext.UserRegistrations.Add(new Registration()
             {
-                UserId =registrationModel.UserId,
-                RoleId= registrationModel.RoleId,
+                UserId = registrationModel.UserId,
+                RoleId = registrationModel.RoleId,
                 Username = registrationModel.Username,
                 Pwd = registrationModel.Pwd,
                 ConfirmPassword = registrationModel.ConfirmPassword,

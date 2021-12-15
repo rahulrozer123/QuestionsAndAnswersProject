@@ -28,7 +28,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
             var registrations = _service.GetAllRegistrations();
             if(registrations == null)
             {
-                return BadRequest();
+                return NoContent();
             }
             return Ok(registrations);
         }
@@ -37,7 +37,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]        
         //Used to add data to db
-        public IActionResult AddNewRegistrations([FromBody] Registration registrationModel)
+        public IActionResult AddNewRegistrations([FromBody] RegistrationModel registrationModel)
         {
             if (!ModelState.IsValid)
             {
@@ -47,9 +47,9 @@ namespace QuestionsAndAnswersWebAPI.Controllers
             var item = _service.Add(registrationModel);
             if (item == null)
             {
-                return NotFound();
+                return NoContent();
             }
-            return Ok();
+            return Ok(item);
         }
     }
 }

@@ -9,6 +9,6 @@ namespace QuestionsAndAnswersWebAPI.Services
 {
     public interface IAnswersService
     {
-        IEnumerable<Answers> GetAnswersGivenByUser(Answers answers);
+       AnswersModel GetAnswersGivenByUser(AnswersModel answers);
     }
 }

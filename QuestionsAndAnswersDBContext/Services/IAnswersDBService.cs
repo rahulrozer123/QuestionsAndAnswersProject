@@ -8,6 +8,6 @@ namespace QuestionsAndAnswersDBContext.Services
 {
     public interface IAnswersDBService
     {
-        public IEnumerable<Answers> GetAnswers(Answers answers);
+        public Answers GetAnswers(Answers answers);
     }
 }

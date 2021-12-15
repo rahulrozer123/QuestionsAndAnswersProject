@@ -13,6 +13,9 @@ namespace QuestionsAndAnswersWebAPI.Models
         //public int RoleId { get; set; }
         public string Username { get; set; }       
         public string Email { get; set; }
+
+        public string Pwd { get; set; }
+        public string ConfirmPassword { get; set; }
         public int YearsOfExperience { get; set; }
         public string Technology { get; set; }
 

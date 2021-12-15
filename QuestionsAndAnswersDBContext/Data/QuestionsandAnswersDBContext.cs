@@ -31,7 +31,7 @@ namespace QuestionsAndAnswersDBContext.Data
         {
             modelBuilder.Entity<Registration>(entity =>
             {
-                //entity.HasKey("UserId");
+                entity.HasKey("UserId");
                 
                 entity.ToTable("UserRegistration");
 
@@ -60,7 +60,7 @@ namespace QuestionsAndAnswersDBContext.Data
             {
                 entity.ToTable("MasterTechnology");
                 
-                //entity.HasKey("TechnologyId");
+                entity.HasKey("TechnologyId");
                 entity.Property(e => e.TechnologyId);
 
                 entity.Property(e => e.TechnologyName);                                    
@@ -71,7 +71,7 @@ namespace QuestionsAndAnswersDBContext.Data
                 //entity.HasNoKey();
 
                 entity.ToTable("QuestionandAnswer");
-                //entity.HasKey("QuestionID");
+                entity.HasKey("QuestionID");
 
                 entity.Property(e => e.QuestionID).HasColumnName("QuestionID").ValueGeneratedOnAdd();
                 entity.Property(e => e.TechnologyId).HasColumnName("TechnologyId");
@@ -87,7 +87,7 @@ namespace QuestionsAndAnswersDBContext.Data
 
             modelBuilder.Entity<Answers>(entity =>
             {
-                //entity.HasNoKey();
+                entity.HasKey("AnswersId");
 
                 entity.ToTable("Answers");
                 entity.Property(e => e.AnswersId).ValueGeneratedOnAdd();
@@ -97,7 +97,7 @@ namespace QuestionsAndAnswersDBContext.Data
                     .IsUnicode(false);
 
                 entity.Property(e => e.Result).HasColumnType("Result");
-
+                
                 entity.Property(e => e.UserId).HasColumnName("UserId");
                 entity.Property(e => e.TechnologyId).HasColumnName("TechnologyId");
                 entity.Property(e => e.QuestionId).HasColumnName("QuestionId");                                
@@ -105,9 +105,7 @@ namespace QuestionsAndAnswersDBContext.Data
 
             modelBuilder.Entity<Roles>(entity =>
             {
-                entity.HasIndex(e => e.RoleId)
-                    .IsUnique();
-
+                entity.HasKey("RoleId");                                    
                 entity.Property(e => e.Rolename)
                     .HasMaxLength(50)
                     .IsUnicode(false);                

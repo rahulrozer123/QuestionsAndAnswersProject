@@ -21,17 +21,29 @@ namespace QuestionsAndAnswersWebAPI.Services
         {
             var data= _dbContext.GetAllRegistrations()
                 .Select(f=> new RegistrationModel()
-                {
+                {                    
                 Username = f.Username,
+                Pwd = f.Pwd,
+                ConfirmPassword = f.ConfirmPassword,
                 Email = f.Email,
                 YearsOfExperience = f.YearsOfExperience,
                 Technology= f.Technology
             }).ToList();
             return data;
         }
-        public Registration Add(Registration registrationModel)
+        public RegistrationModel Add(RegistrationModel registrationModel)
         {
-            _dbContext.Add(registrationModel);
+            //_dbContext.Add(registrationModel);
+            //return registrationModel;
+            _dbContext.Add(new Registration()
+            {
+                Username = registrationModel.Username,
+                Email = registrationModel.Email,
+                Pwd = registrationModel.Pwd,
+                ConfirmPassword = registrationModel.ConfirmPassword,
+                YearsOfExperience = registrationModel.YearsOfExperience,
+                Technology = registrationModel.Technology
+            });
             return registrationModel;
         }
     }

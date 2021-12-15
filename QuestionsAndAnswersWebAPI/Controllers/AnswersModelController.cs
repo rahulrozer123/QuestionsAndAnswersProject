@@ -33,7 +33,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
             var item = _service.GetAnswersGivenByUser(answersModel);
             if (item == null)
             {
-                return NotFound();
+                return NoContent();
             }
             return Ok();
         }
