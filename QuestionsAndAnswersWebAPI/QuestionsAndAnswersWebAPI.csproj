@@ -12,6 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\LoginController.cs" />
+    <Compile Remove="Models\LoginModel.cs" />
+    <Compile Remove="Services\ILoginService.cs" />
+    <Compile Remove="Services\LoginService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.12">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
