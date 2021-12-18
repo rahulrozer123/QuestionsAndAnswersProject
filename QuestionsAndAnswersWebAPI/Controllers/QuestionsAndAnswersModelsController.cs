@@ -30,7 +30,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
             var questionAndAnswers = _service.GetAllQuestionsAndAnswers();
             if (questionAndAnswers == null)
             {
-                return NoContent();
+                return NotFound();
             }
             return Ok(questionAndAnswers);
         }
@@ -56,7 +56,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
             var technologyModel = _service.GetQuestionsByTechnologyId(id);
             if (technologyModel == null)
             {
-                return NoContent();
+                return NotFound();
             }
             return Ok(technologyModel);
         }

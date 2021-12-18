@@ -37,7 +37,7 @@ namespace QuestionsAndAnswersWebAPI.Services
             //return registrationModel;
             _dbContext.Add(new Registration()
             {
-                RoleId = registrationModel.RoleId,
+                RoleId = 1,
                 Username = registrationModel.Username,
                 Email = registrationModel.Email,
                 Pwd = registrationModel.Pwd,
