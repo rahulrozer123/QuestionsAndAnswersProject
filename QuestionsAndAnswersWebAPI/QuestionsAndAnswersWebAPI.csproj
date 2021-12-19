@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\LoginController.cs" />
-    <Compile Remove="Models\LoginModel.cs" />
+    <Compile Remove="Controllers\LoginModelController.cs" />
     <Compile Remove="Services\ILoginService.cs" />
     <Compile Remove="Services\LoginService.cs" />
   </ItemGroup>

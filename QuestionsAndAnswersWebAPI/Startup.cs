@@ -37,6 +37,7 @@ namespace QuestionsAndAnswersWebAPI
             services.AddTransient<ITechnologyService, TechnologyService>();
             services.AddTransient<IRegistrationService, RegistrationService>();
             services.AddTransient<IAnswersService, AnswersService>();
+            //services.AddTransient<ILoginService, LoginService>();
             services.AddScoped<IQuestionAndAnswerDBService, QuestionAndAnswerDBService>();
             services.AddScoped<ITechnologyDBService, TechnologyDBService>();
             services.AddScoped<IRegistrationDBService, RegistrationDBService>();

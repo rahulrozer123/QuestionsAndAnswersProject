@@ -32,7 +32,7 @@ namespace QuestionsAndAnswersWebAPI.Services
                     QuestionId = int.Parse(x),
                     UserId = answersModel.UserId,
                     Result = GetResult(int.Parse(x), val),
-                    TechnologyId = answersModel.TechnologyId,
+                    TechnologyId = GetTechnologyId(int.Parse(x)),
                 });
             }            
 
@@ -55,6 +55,13 @@ namespace QuestionsAndAnswersWebAPI.Services
                 return true;
             else
                 return false;
+        }
+        
+        private int GetTechnologyId(int questonId)
+        {
+            var entity = _Dbcontext.QuestionandAnswers.Where(e => e.QuestionID == questonId).FirstOrDefault();
+            var technologyId = entity.TechnologyId;
+            return technologyId;
         }
     }
 }
