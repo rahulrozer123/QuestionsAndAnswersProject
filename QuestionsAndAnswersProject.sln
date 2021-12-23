@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionsAndAnswersWebAPI",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionsAndAnswersDBContext", "QuestionsAndAnswersDBContext\QuestionsAndAnswersDBContext.csproj", "{1DDF8BFC-22DD-48A3-A5ED-F973C3E6AE36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionsAndAnswersWebAPITests", "QuestionsAndAnswersWebAPITests\QuestionsAndAnswersWebAPITests.csproj", "{402AE031-5502-4E50-AAF8-5D0C11FA4F11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionsAndAnswersWebAPITests", "QuestionsAndAnswersWebAPITests\QuestionsAndAnswersWebAPITests.csproj", "{402AE031-5502-4E50-AAF8-5D0C11FA4F11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionAndAnswerMVC", "QuestionAndAnswerMVC\QuestionAndAnswerMVC.csproj", "{BA0C68AE-C3DE-4D9E-AD83-8B555F216B79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{402AE031-5502-4E50-AAF8-5D0C11FA4F11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{402AE031-5502-4E50-AAF8-5D0C11FA4F11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{402AE031-5502-4E50-AAF8-5D0C11FA4F11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0C68AE-C3DE-4D9E-AD83-8B555F216B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0C68AE-C3DE-4D9E-AD83-8B555F216B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0C68AE-C3DE-4D9E-AD83-8B555F216B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0C68AE-C3DE-4D9E-AD83-8B555F216B79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

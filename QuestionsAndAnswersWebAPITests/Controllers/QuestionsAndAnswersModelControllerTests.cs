@@ -48,9 +48,9 @@ namespace QuestionsAndAnswersWebAPITests.Controllers
             //var controller = new QuestionsAndAnswersModelsController(_service);
             var testId = 6;
             //Act
-            var notFoundResult = _controller.GetTechnologyModel(testId);
+            IActionResult notFoundResult = _controller.GetTechnologyModel(testId);
             //Assert
-            Assert.IsType<NoContentResult>(notFoundResult);
+            Assert.IsType<NotFoundResult>(notFoundResult);
         }
         [Fact]
         public void GetByTechnologyId_ExistingIdPassed_ReturnsOkResult()
@@ -61,12 +61,6 @@ namespace QuestionsAndAnswersWebAPITests.Controllers
             var okResult = _controller.GetTechnologyModel(testId);
             // Assert
             Assert.IsType<OkObjectResult>(okResult as OkObjectResult);
-        }
-        
-        [Fact]
-        public void UpdateExisting_Questions()
-        {
-
         }
     }
 }

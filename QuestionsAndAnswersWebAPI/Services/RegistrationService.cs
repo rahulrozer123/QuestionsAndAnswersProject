@@ -19,16 +19,17 @@ namespace QuestionsAndAnswersWebAPI.Services
 
         public IEnumerable<RegistrationModel> GetAllRegistrations()
         {
-            var data= _dbContext.GetAllRegistrations()
-                .Select(f=> new RegistrationModel()
-                {                    
-                Username = f.Username,
-                Pwd = f.Pwd,
-                ConfirmPassword = f.ConfirmPassword,
-                Email = f.Email,
-                YearsOfExperience = f.YearsOfExperience,
-                Technology= f.Technology
-            }).ToList();
+            var data = _dbContext.GetAllRegistrations()
+                .Select(f => new RegistrationModel()
+                {
+                    UserId = f.UserId,
+                    Username = f.Username,
+                    Pwd = f.Pwd,
+                    ConfirmPassword = f.ConfirmPassword,
+                    Email = f.Email,
+                    YearsOfExperience = f.YearsOfExperience,
+                    Technology = f.Technology
+                }).ToList();
             return data;
         }
         public RegistrationModel Add(RegistrationModel registrationModel)

@@ -41,7 +41,15 @@ namespace QuestionsAndAnswersWebAPITests.Services
 
         public void Update(QuestionsAndAnswers questionsAndAnswersModel)
         {
-            
+            //var entity = _questionsAndAnswers.Where(e => e.QuestionID == questionsAndAnswersModel.QuestionID).FirstOrDefault();
+            //if (entity != null)
+            //{
+            //    entity.Question = questionsAndAnswersModel.Question;                
+            //    entity.Option1 = questionsAndAnswersModel.Option1;
+            //    entity.Option2 = questionsAndAnswersModel.Option2;
+            //    entity.Option3 = questionsAndAnswersModel.Option3;
+            //    entity.Option4 = questionsAndAnswersModel.Option4;                              
+            //}
         }
     }
 }

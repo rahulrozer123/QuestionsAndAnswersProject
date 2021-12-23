@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuestionsAndAnswersDBContext.Models;
 using QuestionsAndAnswersWebAPI.Models;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace QuestionsAndAnswersWebAPI.Controllers
 {
+    [EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class RegistrationModelsController : ControllerBase

@@ -30,9 +30,21 @@ namespace QuestionsAndAnswersWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "MyPolicy",
+                builder =>
+                {
+                    builder.WithOrigins("https://localhost:44363",
+                                            "http://localhost:44302")
+                                .WithMethods("POST", "PUT", "DELETE", "GET")
+                                .AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader();
+                });
+            });
             services.AddControllers();
-            services.AddMvc();                     
+            services.AddMvc();
             services.AddTransient<IQuestionAndAnswerService, QuestionAndAnswerService>();
             services.AddTransient<ITechnologyService, TechnologyService>();
             services.AddTransient<IRegistrationService, RegistrationService>();
@@ -43,7 +55,7 @@ namespace QuestionsAndAnswersWebAPI
             services.AddScoped<IRegistrationDBService, RegistrationDBService>();
             services.AddScoped<IAnswersDBService, AnswersDBService>();
             var connectionstring = Configuration.GetConnectionString("Myconnection");
-            services.AddDbContext<QuestionsandAnswersDBContext>(options => options.UseSqlServer(connectionstring));          
+            services.AddDbContext<QuestionsandAnswersDBContext>(options => options.UseSqlServer(connectionstring));
 
             services.AddSwaggerGen(c =>
             {
@@ -60,10 +72,10 @@ namespace QuestionsAndAnswersWebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuestionsAndAnswersWebAPI v1"));
             }
-            
+
 
             app.UseRouting();
-
+            app.UseCors();
             app.UseAuthorization();
             app.UseHttpsRedirection();
 
