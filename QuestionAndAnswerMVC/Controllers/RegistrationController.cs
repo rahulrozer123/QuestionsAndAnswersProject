@@ -28,7 +28,8 @@ namespace QuestionAndAnswerMVC.Controllers
             {
                 return View(register);
             }
-            return RedirectToAction("Login");            
+            //return RedirectToAction("Login");
+            return View();
         }
 
         public ActionResult Login()

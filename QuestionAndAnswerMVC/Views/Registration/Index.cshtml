@@ -37,7 +37,7 @@
         <div class="k-form-field">
             <div class="k-form-field-wrap col-md-10">
                 @(Html.Kendo()
-                .TextBoxFor(model => model.Pwd)
+                .TextBoxFor(model=>model.Pwd)
                 .Name("pwd")
                 .Label(label=>label.Content("Password"))
                 .HtmlAttributes(new { type = "password",placeholder = "Enter password",@class="form-control", required = "required" })
@@ -120,11 +120,11 @@
         $("#registrationSubmit").click(function () {
             var register = new Object();
             register.username = $("#userName").val();
-            register.password = $("#pwd").val();
+            register.pwd = $("#pwd").val();
             register.confirmPassword = $("#confirmPassword").val();
             register.email = $("#email").val();
             register.yearsOfExperience = $("#yearsOfExperience").val();
-            register.technology = $("#technology").val();
+            register.technology = $("#technology").val();            
             $.ajax({
                 type: "POST",
                 url: "https://localhost:44363/api/RegistrationModels/",

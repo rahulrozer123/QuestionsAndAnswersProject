@@ -2950,12 +2950,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\QuestionsAndAnswersDBContext\QuestionsAndAnswersDBContext.csproj">
-      <Project>{1ddf8bfc-22dd-48a3-a5ed-f973c3e6ae36}</Project>
-      <Name>QuestionsAndAnswersDBContext</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
