@@ -47,6 +47,14 @@
         var validator = $("#loginForm").kendoValidator().data("kendoValidator");
         var validationSummary = $("#validation-summary");
 
+        $("#loginSubmit").on("click", function () {
+            if (validator.validate()) {
+                // If the form is valid, the Validator will return true
+            }
+            else {
+            }
+        });
+
         $("#loginForm").submit(function (event) {
             event.preventDefault();
 
@@ -55,6 +63,26 @@
             } else {
                 validationSummary.html("<div class='k-messagebox k-messagebox-error'>Oops! There is invalid data in the form.</div>");
             }
+        });
+
+        $("#loginSubmit").click(function () {
+            var login = new Object();
+            login.username = $("#userName").val();
+            login.pwd = $("#pwd").val();
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:44363/api/LoginModel/",
+                contentType: "application/json;charset=utf - 8",
+                dataType: "json",
+                data: JSON.stringify(login),
+                success: function () {
+                    if (validator.validate())
+                        validationSummary.html("<div class='k-messagebox k-messagebox-success'>You have been successfully logged in</div>");
+                },
+                error: function () {
+                    validationSummary.html("<div class='k-messagebox k-messagebox-error'>Oops! There is invalid data in the form.</div>");
+                }
+            });
         });
     });
 </script>

@@ -8,6 +8,6 @@ namespace QuestionsAndAnswersWebAPI.Services
 {
     public interface ILoginService
     {
-        LoginModel GetUserId(LoginModel login);
+        LoginModel ValidateUserLogin(LoginModel login);
     }
 }

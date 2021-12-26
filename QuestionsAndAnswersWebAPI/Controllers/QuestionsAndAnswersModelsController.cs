@@ -56,10 +56,14 @@ namespace QuestionsAndAnswersWebAPI.Controllers
         public IActionResult GetTechnologyModel(int id)
         {
             var technologyModel = _service.GetQuestionsByTechnologyId(id);
-            if (technologyModel == null || !technologyModel.Any() || technologyModel.Count() == 0)
+            if (id > 5)
             {
-                return NotFound();
-            }
+                return NotFound(new
+                {
+                    StatusCode = 404,
+                    Message = "No questions available for the below technology"
+                });
+            }            
             return Ok(technologyModel);
         }
 

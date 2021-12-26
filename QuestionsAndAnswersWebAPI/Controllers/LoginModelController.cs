@@ -34,10 +34,24 @@ namespace QuestionsAndAnswersWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var item = _service.GetUserId(loginModel);            
-            //var obj = _dbContext.UserRegistrations.Where(a => a.Username.Equals(loginModel.UserName) && a.Pwd.Equals(loginModel.Password)).FirstOrDefault();
-            //TempData["UserId"] = obj.UserId;
-            return Ok(loginModel);
+            var item = _service.ValidateUserLogin(loginModel);
+            
+            if(item != null)
+            {
+                return Ok(new
+                {
+                    StatusCode = 200,
+                    Message = "Logged in successfully"
+                });
+            }
+            else
+            {
+                return NotFound(new
+                {
+                    StatusCode = 404,
+                    Message="User not found"
+                });                 
+            }            
         }
     }
 }

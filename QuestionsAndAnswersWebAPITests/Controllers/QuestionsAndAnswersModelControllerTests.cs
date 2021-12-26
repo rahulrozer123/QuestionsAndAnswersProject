@@ -50,7 +50,7 @@ namespace QuestionsAndAnswersWebAPITests.Controllers
             //Act
             IActionResult notFoundResult = _controller.GetTechnologyModel(testId);
             //Assert
-            Assert.IsType<NotFoundResult>(notFoundResult);
+            Assert.IsType<NotFoundObjectResult>(notFoundResult);
         }
         [Fact]
         public void GetByTechnologyId_ExistingIdPassed_ReturnsOkResult()

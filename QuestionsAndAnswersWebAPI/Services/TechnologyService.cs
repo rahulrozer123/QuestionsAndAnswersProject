@@ -21,8 +21,9 @@ namespace QuestionsAndAnswersWebAPI.Services
             var data = _technologyContext.GetAllTechnologies()
                  .Select(f => new TechnologyModel()
                  {
+                    TechnologyId = f.TechnologyId,
                     TechnologyName = f.TechnologyName
-                 }) ;
+                 }).ToList();
             return data;
         } 
     }

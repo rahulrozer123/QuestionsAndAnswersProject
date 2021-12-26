@@ -8,8 +8,8 @@ namespace QuestionsAndAnswersWebAPI.Models
 {
     public class TechnologyModel
     {
-        //[Key]
-        //public int TechnologyId { get; set; }
+        [Key]        
+        public int TechnologyId { get; set; }
 
         public string TechnologyName { get; set; }
     }
