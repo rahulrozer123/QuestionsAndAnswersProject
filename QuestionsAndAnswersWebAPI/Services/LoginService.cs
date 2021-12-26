@@ -22,7 +22,11 @@ namespace QuestionsAndAnswersWebAPI.Services
         }
         public LoginModel ValidateUserLogin(LoginModel login)
         {
-            var obj =_dbContext.UserRegistrations.Where(a => a.Username == login.UserName & a.Pwd == login.Password).FirstOrDefault();            
+            var obj =_dbContext.UserRegistrations.Where(a => a.Username == login.UserName & a.Pwd == login.Password).FirstOrDefault();
+            if(obj == null)
+            {
+                return null;
+            }
             return login;
         }       
     }
