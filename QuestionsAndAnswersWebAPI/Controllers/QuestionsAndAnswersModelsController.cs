@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,7 +53,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
 
         //GET: api/TechnologyModels/5
         [HttpGet]
-       // [Route("Get questions based on technology id")]
+        [Route("Get questions based on technology id")]
         public IActionResult GetTechnologyModel(int id)
         {
             var technologyModel = _service.GetQuestionsByTechnologyId(id);

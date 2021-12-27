@@ -3,8 +3,8 @@
     ViewBag.Title = "GetTechnologies";
 }
 
-@using (Html.BeginForm())
-    {
+@using (Html.BeginForm("GetTechnologies", "QuestionsAndAnswers",FormMethod.Post))
+{
         @Html.AntiForgeryToken()
         <div class="form-horizontal" id="technologiesControl">
         <div class="demo-section k-content">

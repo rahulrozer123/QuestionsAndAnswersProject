@@ -34,9 +34,14 @@ namespace QuestionAndAnswerMVC.Controllers
             {
                 var consmedata = readdata.Content.ReadAsAsync<IList<TechnologyViewModel>>();
                 consmedata.Wait();
-                technologies = consmedata.Result;
+                technologies = consmedata.Result;                
             }
             return View(technologies);
+        }
+        [HttpPost]
+        public ActionResult GetTechnologies(TechnologyViewModel technologies)
+        {            
+            return View();
         }
     }
 }

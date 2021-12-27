@@ -10,10 +10,11 @@
 
     <div class="form-horizontal" id="registrationForm">
         <div id="validation-summary"> </div>
-        <h4>Registration Form</h4>
+        <h4>Registration Form</h4>                    
+            @*<a class="btn btn-link" href="Login">Login</a>*@        
         <hr />
         <div class="k-form-field">
-            <div class="k-form-field-wrap col-md-10">
+            <div class="k-form-field-wrap col-md-5">
                 @(Html.Kendo()
                    .TextBoxFor(model => model.Username)
                    .Name("userName")
@@ -24,7 +25,7 @@
         </div>
 
         <div class="k-form-field">
-            <div class="k-form-field-wrap col-md-10">
+            <div class="k-form-field-wrap col-md-5">
                 @(Html.Kendo()
                   .TextBoxFor(model => model.Email)
                   .Name("email")
@@ -35,7 +36,7 @@
         </div>
 
         <div class="k-form-field">
-            <div class="k-form-field-wrap col-md-10">
+            <div class="k-form-field-wrap col-md-5">
                 @(Html.Kendo()
                 .TextBoxFor(model=>model.Pwd)
                 .Name("pwd")
@@ -46,7 +47,7 @@
         </div>
 
         <div class="k-form-field">
-            <div class="k-form-field-wrap col-md-10">
+            <div class="k-form-field-wrap col-md-5">
                 @(Html.Kendo()
                 .TextBoxFor(model=>model.ConfirmPassword)
                 .Name("confirmPassword")
@@ -57,7 +58,7 @@
         </div>
 
         <div class="k-form-field">
-            <div class="k-form-field-wrap col-md-10">
+            <div class="k-form-field-wrap col-md-5">
                 @(Html.Kendo()
                 .NumericTextBoxFor(model=>model.YearsOfExperience)
                 .Name("yearsOfExperience")
@@ -68,7 +69,7 @@
         </div>
 
         <div class="k-form-field">
-            <div class="k-form-field-wrap col-md-10">
+            <div class="k-form-field-wrap col-md-5">
                 @(Html.Kendo()
                 .TextBoxFor(model=>model.Technology)
                 .Name("technology")
@@ -79,11 +80,33 @@
         </div>
 
         <div class="k-form-field">
-            <div class="k-form-field-wrap col-md-10">
+            <div class="k-form-field-wrap col-md-5">
                 <button class="btn btn-primary" type="submit" id="registrationSubmit">Register</button>
             </div>
         </div>
+
+        @*<div class="modal fade" tabindex="-1" id="successModal"
+                 data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body k-messagebox k-messagebox-success">
+                            <h2>You have been successfully registerted</h2>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-success">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
     </div>
+
 }
 
 <script type="text/javascript">
@@ -124,7 +147,7 @@
             register.confirmPassword = $("#confirmPassword").val();
             register.email = $("#email").val();
             register.yearsOfExperience = $("#yearsOfExperience").val();
-            register.technology = $("#technology").val();            
+            register.technology = $("#technology").val();
             $.ajax({
                 type: "POST",
                 url: "https://localhost:44363/api/RegistrationModels/",
@@ -132,8 +155,7 @@
                 dataType: "json",
                 data: JSON.stringify(register),
                 success: function () {
-                    if (validator.validate())
-                        validationSummary.html("<div class='k-messagebox k-messagebox-success'>You have been successfully registerted</div>");
+                    validationSummary.html("<div class='k-messagebox k-messagebox-success'>You have been successfully registerted</div>");
                 },
                 error: function () {
                     validationSummary.html("<div class='k-messagebox k-messagebox-error'>Oops! There is invalid data in the form.</div>");

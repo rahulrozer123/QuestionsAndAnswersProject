@@ -26,32 +26,6 @@ namespace QuestionsAndAnswersWebAPI.Controllers
             //_dbContext = dbContext;
         }
         
-        [HttpPost]        
-        public IActionResult GetLoginDetails([FromBody] LoginModel loginModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var item = _service.ValidateUserLogin(loginModel);
-            
-            if(item != null)
-            {
-                return Ok(new
-                {
-                    StatusCode = 200,
-                    Message = "Logged in successfully"
-                });
-            }
-            else
-            {
-                return NotFound(new
-                {
-                    StatusCode = 404,
-                    Message="User not found"
-                });                 
-            }            
-        }
+        
     }
 }

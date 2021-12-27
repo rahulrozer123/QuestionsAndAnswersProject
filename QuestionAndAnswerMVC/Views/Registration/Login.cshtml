@@ -12,7 +12,7 @@
         <h4>Login Page</h4>
         <hr />
         <div class="k-form-field">
-            <div class="k-form-field-wrap col-md-10">
+            <div class="k-form-field-wrap col-md-5">
                 @(Html.Kendo()
                    .TextBoxFor(model => model.UserName)
                    .Name("userName")
@@ -23,21 +23,26 @@
         </div>
 
         <div class="k-form-field">
-            <div class="k-form-field-wrap col-md-10">
+            <div class="k-form-field-wrap col-md-5">
                 @(Html.Kendo()
-                .TextBoxFor(model => model.Pwd)
-                .Name("pwd")
+                .TextBoxFor(model => model.Password)
+                .Name("password")
                 .Label(label=>label.Content("Password"))
                 .HtmlAttributes(new { type = "password",placeholder = "Enter password",@class="form-control", required = "required" })
                 )
             </div>
         </div>
 
-        <div class="k-form-field">
-            <div class="k-form-field-wrap col-md-10">
+        <div class="k-form-field col-md-5">
+            <div class="k-form-field-wrap">
                 <button class="btn btn-primary" type="submit" id="loginSubmit">Submit</button>
             </div>
         </div>
+
+        @*<div id="divError" class="alert alert danger collapse">
+            <a id="linkClose" href="#" class="close">&times</a>
+            <div id="divErrorText"></div>
+        </div>*@
     </div>
 }
 
@@ -55,35 +60,38 @@
             }
         });
 
+        $("#linkClose").click(function () {
+            $('#divError').hide('fade');
+        });
+
         $("#loginForm").submit(function (event) {
             event.preventDefault();
 
-            if (validator.validate()) {
-                validationSummary.html("<div class='k-messagebox k-messagebox-success'>You have been successfully logged in</div>");
-            } else {
-                validationSummary.html("<div class='k-messagebox k-messagebox-error'>Oops! There is invalid data in the form.</div>");
-            }
+            //if (validator.validate()) {
+            //    validationSummary.html("<div class='k-messagebox k-messagebox-success'>You have been successfully logged in</div>");
+            //} else {
+            //    validationSummary.html("<div class='k-messagebox k-messagebox-error'>Oops! There is invalid data in the form.</div>");
+            //}
         });
 
-        $("#loginSubmit").click(function () {
-            var login = new Object();
-            login.username = $("#userName").val();
-            login.pwd = $("#pwd").val();
-            $.ajax({
-                type: "POST",
-                url: "https://localhost:44363/api/LoginModel/",
-                contentType: "application/json;charset=utf - 8",
-                dataType: "json",
-                data: JSON.stringify(login),
-                success: function () {
-                    if (validator.validate())
-                        validationSummary.html("<div class='k-messagebox k-messagebox-success'>You have been successfully logged in</div>");
-                },
-                error: function () {
-                    validationSummary.html("<div class='k-messagebox k-messagebox-error'>Oops! There is invalid data in the form.</div>");
-                }
-            });
-        });
+        //$("#loginsubmit").click(function () {
+        //    var login = new object();
+        //    login.username = $("#username").val();
+        //    login.password = $("#password").val();
+        //    $.ajax({
+        //        type: "post",
+        //        url: "https://localhost:44363/api/LoginModel",
+        //        contenttype: "application/json;charset=utf - 8",
+        //        datatype: "json",
+        //        data: json.stringify(login),                
+        //        success: function () {
+        //            window.location.href = "GetTechnologies.cshtml";
+        //        },
+        //        error: function () {
+                    
+        //        }
+        //    });
+        //});
     });
 </script>
 

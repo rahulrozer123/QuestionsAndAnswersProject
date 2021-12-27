@@ -1,14 +1,26 @@
-﻿using QuestionAndAnswerMVC.Models;
+﻿using Newtonsoft.Json;
+using QuestionAndAnswerMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
 namespace QuestionAndAnswerMVC.Controllers
 {
     public class RegistrationController : Controller
-    {        
+    {
+        Uri baseAddress = new Uri("https://localhost:44363/api/");
+        HttpClient client;
+
+        public RegistrationController()
+        {
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+        }
+
         // GET: Registration
         public ActionResult Index()
         {
@@ -43,11 +55,14 @@ namespace QuestionAndAnswerMVC.Controllers
             //    //    return RedirectToAction("QuestionAndAnswer", "QuestionsAndAnswers");
             //    //}
             //}
-            if(!ModelState.IsValid)
+            string data = JsonConvert.SerializeObject(login);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "RegistrationModels", content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View(login);
+                return RedirectToAction("GetTechnologies", "QuestionsAndAnswers");
             }
-            return RedirectToAction("GetTechnologies", "QuestionsAndAnswers");
+            return View();
         }
     }
 }

@@ -17,10 +17,12 @@ namespace QuestionsAndAnswersWebAPI.Controllers
     public class RegistrationModelsController : ControllerBase
     {
         private readonly IRegistrationService _service;
+        private readonly ILoginService _loginService;
 
-        public RegistrationModelsController(IRegistrationService service)
+        public RegistrationModelsController(IRegistrationService service,  ILoginService loginService)
         {
             _service = service;
+            _loginService = loginService;
         }
 
         //GET: api/RegistraionModels
@@ -52,6 +54,35 @@ namespace QuestionsAndAnswersWebAPI.Controllers
                 return NoContent();
             }
             return Ok(item);
+        }
+
+        [HttpPost]
+        [Route("Login module")]
+        public IActionResult GetLoginDetails([FromBody] LoginModel loginModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var item = _loginService.ValidateUserLogin(loginModel);
+
+            if (item != null)
+            {
+                return Ok(new
+                {
+                    StatusCode = 200,
+                    Message = "Logged in successfully"
+                });
+            }
+            else
+            {
+                return NotFound(new
+                {
+                    StatusCode = 404,
+                    Message = "User not found"
+                });
+            }
         }
     }
 }

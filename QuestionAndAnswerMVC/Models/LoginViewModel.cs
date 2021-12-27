@@ -15,6 +15,6 @@ namespace QuestionAndAnswerMVC.Models
         public string UserName { get; set; }
         [Required(ErrorMessage = "Please enter password")]
         [Display(Name = "Password")]
-        public string Pwd { get; set; }
+        public string Password { get; set; }
     }
 }
