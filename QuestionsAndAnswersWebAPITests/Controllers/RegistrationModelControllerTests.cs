@@ -17,11 +17,12 @@ namespace QuestionsAndAnswersWebAPITests.Controllers
 
         private readonly RegistrationModelsController _controller;
         private readonly IRegistrationService _service;
+        private readonly ILoginService _loginService;
 
         public RegistrationModelControllerTests()
         {
             _service = new RegistrationServiceFake();
-            _controller = new RegistrationModelsController(_service);
+            _controller = new RegistrationModelsController(_service,_loginService);
             
         }
         [Fact]

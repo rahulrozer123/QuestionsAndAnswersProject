@@ -76,8 +76,8 @@ namespace QuestionsAndAnswersWebAPI
 
             app.UseRouting();
             app.UseCors();
-            app.UseAuthorization();
-            app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();            
             app.UseHttpsRedirection();
 
             app.UseEndpoints(endpoints =>
