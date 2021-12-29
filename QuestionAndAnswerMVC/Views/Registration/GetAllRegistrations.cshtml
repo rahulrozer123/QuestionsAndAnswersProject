@@ -1,0 +1,46 @@
+﻿@model IEnumerable<QuestionAndAnswerMVC.Models.RegistrationViewModel>
+@{
+    ViewBag.Title = "GetAllRegistrations";
+}
+
+<h2>GetAllRegistrations</h2>
+<div class="container-fluid">
+    <div class="tabbed-container">
+        @(Html.Kendo().Grid(Model).Name("Grid").TableHtmlAttributes(new { @class = "table table-striped" })
+            .Columns(columns =>
+            {
+                columns.Bound(x => x.UserId).Filterable(ftb => ftb.Multi(true));                
+                columns.Bound(x => x.Username).Filterable(ftb => ftb.Multi(true));
+                columns.Bound(x => x.Pwd).Filterable(ftb => ftb.Multi(true));
+                columns.Bound(x => x.ConfirmPassword).Filterable(ftb => ftb.Multi(true));
+                columns.Bound(x => x.Email).Filterable(ftb => ftb.Multi(true));
+                columns.Bound(x => x.YearsOfExperience).Filterable(ftb => ftb.Multi(true));
+                columns.Bound(x => x.Technology).Filterable(ftb => ftb.Multi(true)).Filterable(ftb => ftb.Multi(true));
+            })
+                .ToolBar(ToolBar =>
+                {                    
+                    ToolBar.Search();
+                })
+                .ToolBar(ToolBar =>
+                {                   
+                    ToolBar.Search();
+                })
+                .Resizable(resize => resize
+                .Columns(true))
+                .Pageable(pageable =>
+                {
+                    pageable.Refresh(true);
+                    pageable.PageSizes(true);
+                })
+                    .Navigatable()
+                    .Sortable()
+                    //.Editable(Editor => Editor.Mode(GridEditMode.InCell))
+                    .Scrollable()
+                    .Filterable()
+                    .DataSource(dataSource => dataSource.Ajax()
+                    .PageSize(10)
+                    .ServerOperation(false)
+                    .Read(read => read.Action("GetAllRegistrations", "Registration"))
+                    ) )
+    </div>
+</div>

@@ -10,8 +10,7 @@
 
     <div class="form-horizontal" id="registrationForm">
         <div id="validation-summary"> </div>
-        <h4>Registration Form</h4>                    
-            @*<a class="btn btn-link" href="Login">Login</a>*@        
+        <h4>Registration Form</h4>        
         <hr />
         <div class="k-form-field">
             <div class="k-form-field-wrap col-md-5">
@@ -82,9 +81,17 @@
         <div class="k-form-field">
             <div class="k-form-field-wrap col-md-5">
                 <button class="btn btn-primary" type="submit" id="registrationSubmit">Register</button>
+                @Html.ActionLink("Login here", "Login")
             </div>
         </div>
 
+        <div class="k-form-field col-md-5 km-left-drawer">
+            <h4 class="alert-success">@ViewData["Success Message"]</h4>
+        </div>
+
+        <div class="k-form-field col-md-5 km-left-drawer">
+            <h4 class="alert-warning">@ViewData["Message"]</h4>
+        </div>
         @*<div class="modal fade" tabindex="-1" id="successModal"
                  data-keyboard="false" data-backdrop="static">
                 <div class="modal-dialog modal-sm">
@@ -139,29 +146,29 @@
             }
         });
 
-        //Calling the post method of API and saving the data in database
-        $("#registrationSubmit").click(function () {
-            var register = new Object();
-            register.username = $("#userName").val();
-            register.pwd = $("#pwd").val();
-            register.confirmPassword = $("#confirmPassword").val();
-            register.email = $("#email").val();
-            register.yearsOfExperience = $("#yearsOfExperience").val();
-            register.technology = $("#technology").val();
-            $.ajax({
-                type: "POST",
-                url: "https://localhost:44363/api/RegistrationModels/",
-                contentType: "application/json;charset=utf - 8",
-                dataType: "json",
-                data: JSON.stringify(register),
-                success: function () {
-                    validationSummary.html("<div class='k-messagebox k-messagebox-success'>You have been successfully registerted</div>");
-                },
-                error: function () {
-                    validationSummary.html("<div class='k-messagebox k-messagebox-error'>Oops! There is invalid data in the form.</div>");
-                }
-            });
-        });
+        ////Calling the post method of API and saving the data in database
+        //$("#registrationSubmit").click(function () {
+        //    var register = new Object();
+        //    register.username = $("#userName").val();
+        //    register.pwd = $("#pwd").val();
+        //    register.confirmPassword = $("#confirmPassword").val();
+        //    register.email = $("#email").val();
+        //    register.yearsOfExperience = $("#yearsOfExperience").val();
+        //    register.technology = $("#technology").val();
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "https://localhost:44363/api/RegistrationModels/",
+        //        contentType: "application/json;charset=utf - 8",
+        //        dataType: "json",
+        //        data: JSON.stringify(register),
+        //        success: function () {
+        //            alert.html("<div class='k-messagebox k-messagebox-success'>You have been successfully registerted</div>");
+        //        },
+        //        error: function () {
+        //            alert.html("<div class='k-messagebox k-messagebox-error'>Oops! There is invalid data in the form.</div>");
+        //        }
+        //    });
+        //});
     });
 </script>
 

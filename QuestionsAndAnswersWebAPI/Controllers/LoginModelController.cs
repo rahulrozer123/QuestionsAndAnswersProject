@@ -17,15 +17,43 @@ namespace QuestionsAndAnswersWebAPI.Controllers
     public class LoginModelController : ControllerBase
     {
         private readonly ILoginService _service;
-        //private readonly QuestionsandAnswersDBContext _dbContext;
-       // Answers answers = new Answers();
+        private readonly QuestionsandAnswersDBContext _dbContext;       
         
-        public LoginModelController(ILoginService service/*, QuestionsandAnswersDBContext dbContext*/)
+        public LoginModelController(ILoginService service, QuestionsandAnswersDBContext dbContext)
         {
             _service = service;
-            //_dbContext = dbContext;
+            _dbContext = dbContext;
         }
-        
-        
+
+        [HttpPost]
+        [Route("Loginmodule")]
+        public IActionResult GetLoginDetails([FromBody] LoginModel loginModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {                
+                var item = _service.ValidateUserLogin(loginModel);
+                if (item != null)
+                {
+                    return Ok(new
+                    {
+                        StatusCode = 200,
+                        Message = "Logged in successfully"
+                    });
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        StatusCode = 404,
+                        Message = "User not found"
+                    });
+                }
+            }
+            
+        }
     }
 }

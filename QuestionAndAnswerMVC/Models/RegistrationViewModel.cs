@@ -11,6 +11,8 @@ namespace QuestionAndAnswerMVC.Models
         [Key]
         public int UserId { get; set; }
         [Required(ErrorMessage = "Username Is required")]
+
+        public int RoleId { get; set; }
         public string Username { get; set; }
         [Required(ErrorMessage = "Email id Is required")]       
         public string Email { get; set; }

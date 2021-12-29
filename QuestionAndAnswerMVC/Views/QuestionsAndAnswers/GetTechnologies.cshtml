@@ -2,24 +2,24 @@
 @{
     ViewBag.Title = "GetTechnologies";
 }
-
-@using (Html.BeginForm("GetTechnologies", "QuestionsAndAnswers", FormMethod.Post))
+@*@if (Session["username"] != null)
 {
+    <h4 style="text-align:right">Welcome @Session["username"].ToString()</h4>
+}*@
+@using (Html.BeginForm("GetTechnologies", "QuestionsAndAnswers", FormMethod.Post))
+{    
     @Html.AntiForgeryToken()
     <div class="form-horizontal" id="technologiesControl">
         <div class="demo-section k-content">
-            <h4>Select technology for which you want to take test</h4>
+            <h4>Select Technology</h4>
             <hr />
             <div class="col-md-10">
                 @foreach (var item in Model)
-                {
-                    @*@Html.Kendo().RadioButton().Name("rdbutton"))
-                        <input id="Radio1" type="radio" name="rdbutton" />
-                        item.TechnologyName*@
-                    @Html.RadioButton("TechnologyName",item.TechnologyName, new {id = item.TechnologyId })@item.TechnologyName                    
+                {                    
+                    @Html.RadioButton("TechnologyName", item.TechnologyName, new { id = item.TechnologyId })@item.TechnologyName
                 }
             </div>
-            <br />
+            <br />            
         </div>
         <br />
         <div>
@@ -29,3 +29,12 @@
         </div>
     </div>
 }
+
+@*<script>
+    $(document).ready(function () {
+        $('input[name="TechnologyName"]').click(function () {
+            var $radio = $('input[name=TechnologyName]:checked');
+            var id = $radio.attr('id');
+        });        
+    });
+</script>*@

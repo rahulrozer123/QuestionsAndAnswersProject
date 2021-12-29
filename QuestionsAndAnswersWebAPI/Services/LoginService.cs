@@ -15,19 +15,19 @@ namespace QuestionsAndAnswersWebAPI.Services
     public class LoginService : ILoginService
     {
         private readonly QuestionsandAnswersDBContext _dbContext;
-        
+
         public LoginService(QuestionsandAnswersDBContext dbContext)
         {
             _dbContext = dbContext;
         }
         public LoginModel ValidateUserLogin(LoginModel login)
         {
-            var obj =_dbContext.UserRegistrations.Where(a => a.Username == login.UserName & a.Pwd == login.Password).FirstOrDefault();
-            if(obj == null)
+            var obj = _dbContext.UserRegistrations.Where(a => a.Username.Equals(login.UserName) && a.Pwd.Equals(login.Password)).FirstOrDefault();
+            if (obj == null)
             {
                 return null;
             }
             return login;
-        }       
+        }
     }
 }

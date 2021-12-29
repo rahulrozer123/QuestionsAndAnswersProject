@@ -16,14 +16,12 @@ namespace QuestionsAndAnswersWebAPITests.Controllers
     {
 
         private readonly RegistrationModelsController _controller;
-        private readonly IRegistrationService _service;
-        private readonly ILoginService _loginService;
+        private readonly IRegistrationService _service;        
 
         public RegistrationModelControllerTests()
         {
             _service = new RegistrationServiceFake();
-            _controller = new RegistrationModelsController(_service,_loginService);
-            
+            _controller = new RegistrationModelsController(_service);           
         }
         [Fact]
         public void Get_WhenCalled_ReturnsOkResult()
