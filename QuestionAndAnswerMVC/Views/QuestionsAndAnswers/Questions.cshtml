@@ -18,35 +18,26 @@
                 @foreach (var item in Model)
                 {
                     <br />                    
-                    @Html.Label("QuestionID", item.Question, new { id = item.QuestionID })
+                    @item.QuestionID @Html.Label("Question",item.Question , new {id = item.QuestionID })
                     <br />
-                    @Html.RadioButton("Option1", item.Option1, new { id = item.QuestionID })@item.Option1
+                    @Html.RadioButton("Option1",item.Option1, new { id = item.Option1 })@item.Option1
                     <br />
-                    @Html.RadioButton("Option2", item.Option2, new { id = item.QuestionID })@item.Option2
+                    @Html.RadioButton("Option2" ,item.Option2, new { id = item.Option2 })@item.Option2
                     <br />
-                    @Html.RadioButton("Option3", item.Option3, new { id = item.QuestionID })@item.Option3
+                    @Html.RadioButton("Option3",item.Option3, new { id = item.Option3 })@item.Option3
                     <br/>
-                    @Html.RadioButton("Option4", item.Option4, new { id = item.QuestionID })@item.Option4
+                    @Html.RadioButton("Option4",item.Option4, new { id = item.Option4 })@item.Option4
                     <br>
                 }
-            </div>
-            <br />
+                <br />
+            </div>            
         </div>
         <br />        
-        <div>
+        
             <div class="k-action-button col-md-10">
                 <button class="btn btn-primary" type="submit" id="questionsSubmit">Next</button>
             </div>
-        </div>
+        
         <br />
     </div>
 }
-
-@*<script>
-        $(document).ready(function () {
-            $('input[name="TechnologyName"]').click(function () {
-                var $radio = $('input[name=TechnologyName]:checked');
-                var id = $radio.attr('id');
-            });
-        });
-    </script>*@

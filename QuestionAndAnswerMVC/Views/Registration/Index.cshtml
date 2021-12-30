@@ -17,7 +17,7 @@
                 @(Html.Kendo()
                    .TextBoxFor(model => model.Username)
                    .Name("userName")
-                   .Label(label => label.Content("User Name"))
+                   .Label(label => label.Content("User Name").Floating(false))
                    .HtmlAttributes(new { placeholder = "Enter Full name",@class = "form-control", required = "required" })
                    )
             </div>
@@ -28,7 +28,7 @@
                 @(Html.Kendo()
                   .TextBoxFor(model => model.Email)
                   .Name("email")
-                  .Label(label => label.Content("Email"))
+                  .Label(label => label.Content("Email").Floating(false))
                   .HtmlAttributes(new { placeholder = "e.g. myname@example.net", @class= "form-control", required = "required", data_email_msg = "Email format is not valid" })
                   )
             </div>
@@ -39,7 +39,7 @@
                 @(Html.Kendo()
                 .TextBoxFor(model=>model.Pwd)
                 .Name("pwd")
-                .Label(label=>label.Content("Password"))
+                .Label(label=>label.Content("Password").Floating(false))
                 .HtmlAttributes(new { type = "password",placeholder = "Enter password",@class="form-control", required = "required" })
                 )
             </div>
@@ -50,7 +50,7 @@
                 @(Html.Kendo()
                 .TextBoxFor(model=>model.ConfirmPassword)
                 .Name("confirmPassword")
-                .Label(label=>label.Content("Confirm Password"))
+                .Label(label=>label.Content("Confirm Password").Floating(false))
                 .HtmlAttributes(new { type = "password",placeholder = "Enter confirm password",@class="form-control", required = "required" })
                 )
             </div>
@@ -61,8 +61,8 @@
                 @(Html.Kendo()
                 .NumericTextBoxFor(model=>model.YearsOfExperience)
                 .Name("yearsOfExperience")
-                .Label(label=>label.Content("Years of Experience"))
-                .HtmlAttributes(new { placeholder = "Enter number of years of experience",@class = "form-control", required = "required" })
+                .Label(label=>label.Content("Years of Experience").Floating(false))
+                .HtmlAttributes(new { placeholder = "Enter number of years of experience",@class = "form-control", required = "required"  })
                 )
             </div>
         </div>
@@ -72,24 +72,24 @@
                 @(Html.Kendo()
                 .TextBoxFor(model=>model.Technology)
                 .Name("technology")
-                .Label(label=>label.Content("Technology"))
-                .HtmlAttributes(new { placeholder = "Enter the technology on which you have worked on",@class = "form-control", required = "required" })
+                .Label(label=>label.Content("Technology").Floating(false))
+                .HtmlAttributes(new { placeholder = "Enter the technology on which you have worked on",@class = "form-control", required = "required"  })
                 )
             </div>
         </div>
 
         <div class="k-form-field">
             <div class="k-form-field-wrap col-md-5">
-                <button class="btn btn-primary" type="submit" id="registrationSubmit">Register</button>
+                <button class="btn btn-success" type="submit" id="registrationSubmit">Register</button>
                 @Html.ActionLink("Login here", "Login")
             </div>
         </div>
 
-        <div class="k-form-field col-md-5 km-left-drawer">
-            <h4 class="alert-success">@ViewData["Success Message"]</h4>
+        <div class="k-form-field col-md-5 km-left-drawer" style="color:darkgreen">
+            <h4 class="alert-success">@ViewData["Success Message"]</h4>            
         </div>
 
-        <div class="k-form-field col-md-5 km-left-drawer">
+        <div class="k-form-field col-md-5 km-left-drawer" style="color:red">
             <h4 class="alert-warning">@ViewData["Message"]</h4>
         </div>
         @*<div class="modal fade" tabindex="-1" id="successModal"

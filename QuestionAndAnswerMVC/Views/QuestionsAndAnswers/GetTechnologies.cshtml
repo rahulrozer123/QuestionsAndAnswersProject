@@ -15,9 +15,8 @@
             <hr />
             <div class="col-md-10">
                 @foreach (var item in Model)
-                {
-                    <br />
-                    @Html.RadioButton("TechnologyId", item.TechnologyId, new { id = item.TechnologyId })@item.TechnologyName
+                {                    
+                    @Html.RadioButton("TechnologyId",item.TechnologyId, new { id = item.TechnologyId })@item.TechnologyName                    
                 }
             </div>
             <br />
@@ -25,7 +24,7 @@
         <br />
         <div>
             <div class="k-action-button col-md-10">
-                <button class="btn btn-primary" type="submit" id="technologySubmit">Next</button>
+                <button class="btn btn-success" type="submit" id="technologySubmit">Next</button>
             </div>
         </div>
     </div>

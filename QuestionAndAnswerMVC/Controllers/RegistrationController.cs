@@ -62,7 +62,7 @@ namespace QuestionAndAnswerMVC.Controllers
                 FormsAuthentication.SetAuthCookie(login.UserName, false);
                 var data=response.Content.ReadAsStringAsync().Result;
                 modelList = JsonConvert.DeserializeObject<LoginViewModel>(data);
-                Session["UserId"] = modelList.ID;
+                Session["UserId"] = modelList.ID;                
                 return RedirectToAction("GetTechnologies", "QuestionsAndAnswers");
             }
             else
@@ -83,6 +83,12 @@ namespace QuestionAndAnswerMVC.Controllers
                 modelList = JsonConvert.DeserializeObject<List<RegistrationViewModel>>(data);
             }
             return View(modelList);
-        }        
+        }
+        
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
     }
 }

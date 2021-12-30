@@ -16,8 +16,8 @@
                 @(Html.Kendo()
                    .TextBoxFor(model => model.UserName)
                    .Name("userName")
-                   .Label(label => label.Content("User Name"))
-                   .HtmlAttributes(new { placeholder = "Enter Full name",@class = "form-control", required = "required" })
+                   .Label(label => label.Content("User Name").Floating(false))
+                   .HtmlAttributes(new { placeholder = "Enter Full name",@class = "form-control", required = "required"  })
                    )
             </div>
         </div>
@@ -27,7 +27,7 @@
                 @(Html.Kendo()
                 .TextBoxFor(model => model.Password)
                 .Name("password")
-                .Label(label=>label.Content("Password"))
+                .Label(label=>label.Content("Password").Floating(false))
                 .HtmlAttributes(new { type = "password",placeholder = "Enter password",@class="form-control", required = "required" })
                 )
             </div>
@@ -35,14 +35,16 @@
 
         <div class="k-form-field col-md-5">
             <div class="k-form-field-wrap">
-                <button class="btn btn-primary" type="submit" id="loginSubmit">Login</button>
+                <button class="btn btn-success" type="submit" id="loginSubmit">Login</button>
                 @Html.ActionLink("New User", "Index")
             </div>
         </div>
         <br />
-        <div class="k-form-field col-md-5 km-left-drawer">
+
+        <div class="k-form-field col-md-5 km-left-drawer" style="color:red">
             <h4 class="alert-warning">@ViewData["Message"]</h4>
-        </div>        
+        </div>
+        
     </div>
 }
 
@@ -58,7 +60,7 @@
             }
             else {
             }
-        });        
+        });
 
         $("#loginForm").submit(function (event) {
             event.preventDefault();
@@ -79,9 +81,9 @@
         //        url: "https://localhost:44363/api/LoginModel/Loginmodule",
         //        contenttype: "application/json;charset=utf - 8",
         //        datatype: "json",
-        //        data: json.stringify(login),                
+        //        data: json.stringify(login),
         //        success: function (data) {
-        //           alert(data.responseText) 
+        //           alert(data.responseText)
         //          //alert.html("<div class='k-messagebox k-messagebox-success'>You have been successfully logged in</div>");
         //        },
         //        error: function () {
