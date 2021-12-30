@@ -54,21 +54,15 @@ namespace QuestionAndAnswerMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel login)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    //var obj = context.UserRegistration.Where(a => a.Username.Equals(login.UserName) && a.Pwd.Equals(login.Pwd)).FirstOrDefault();
-            //    //if (obj != null)
-            //    //{
-            //    //    Session["UserID"] = obj.UserId.ToString();
-            //    //    Session["UserName"] = obj.Username.ToString();
-            //    //    return RedirectToAction("QuestionAndAnswer", "QuestionsAndAnswers");
-            //    //}
-            //}            
+            LoginViewModel modelList = new LoginViewModel();
             HttpResponseMessage response = client.PostAsJsonAsync("LoginModel/Loginmodule", login).Result;
             if (response.IsSuccessStatusCode)
             {
                 Session["username"] = login.UserName.ToString();
                 FormsAuthentication.SetAuthCookie(login.UserName, false);
+                var data=response.Content.ReadAsStringAsync().Result;
+                modelList = JsonConvert.DeserializeObject<LoginViewModel>(data);
+                Session["UserId"] = modelList.ID;
                 return RedirectToAction("GetTechnologies", "QuestionsAndAnswers");
             }
             else

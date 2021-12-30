@@ -2942,6 +2942,7 @@
     <Content Include="Views\Registration\Index.cshtml" />
     <Content Include="Views\QuestionsAndAnswers\GetTechnologies.cshtml" />
     <Content Include="Views\Registration\GetAllRegistrations.cshtml" />
+    <Content Include="Views\QuestionsAndAnswers\Questions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -33,9 +33,9 @@ namespace QuestionsAndAnswersWebAPITests.Services
 
         public IEnumerable<QuestionsAndAnswersModel> GetQuestionsByTechnologyId(int technologyId)
         {
-             yield return _questionsAndAnswers
+               var data=_questionsAndAnswers
                             .Where(a => a.QuestionID == technologyId).FirstOrDefault();
-            //return data;
+            return (IEnumerable<QuestionsAndAnswersModel>)data;
 
         }        
 

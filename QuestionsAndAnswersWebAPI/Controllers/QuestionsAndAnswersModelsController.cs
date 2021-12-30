@@ -51,13 +51,12 @@ namespace QuestionsAndAnswersWebAPI.Controllers
         //    return Ok(questionsAndAnswersModel);
         //}
 
-        //GET: api/TechnologyModels/5
-        [HttpGet]
-        [Route("Get questions based on technology id")]
+        //GET: api/QuestionsAndAnswersModels/5
+        [HttpGet("{id}")]        
         public IActionResult GetTechnologyModel(int id)
         {
             var technologyModel = _service.GetQuestionsByTechnologyId(id);
-            if (id > 5)
+            if (technologyModel.Count() == 0)
             {
                 return NotFound(new
                 {

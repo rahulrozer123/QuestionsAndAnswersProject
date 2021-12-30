@@ -20,7 +20,7 @@ namespace QuestionAndAnswerMVC.Controllers
         }
         public ActionResult GetTechnologies()
         {            
-            if (Session["username"] != null)
+            if (Session["UserId"] != null)
             {
                 IEnumerable<TechnologyViewModel> technologies = null;
                 var readdata = client.GetAsync(client.BaseAddress + "TechnologyModels").Result;
@@ -36,6 +36,28 @@ namespace QuestionAndAnswerMVC.Controllers
         }
         [HttpPost]
         public ActionResult GetTechnologies(TechnologyViewModel technologies)
+        {
+            return RedirectToAction("Questions", technologies);
+        }
+
+        public ActionResult Questions(int technologyId)
+        {
+            if (Session["username"] != null)
+            {
+                IEnumerable<QuestionsandAnswersViewModel> questions = null;
+                var readdata = client.GetAsync(client.BaseAddress +"QuestionsAndAnswersModels/" + technologyId).Result;            
+                if (readdata.IsSuccessStatusCode)
+                {
+                    var consmedata = readdata.Content.ReadAsAsync<IList<QuestionsandAnswersViewModel>>();
+                    consmedata.Wait();
+                    questions = consmedata.Result;
+                    return View(questions);
+                }
+            }
+            return RedirectToAction("Login", "Registration");
+        }
+        [HttpPost]
+        public ActionResult Questions(AnswersViewModel answers)
         {
             return View();
         }

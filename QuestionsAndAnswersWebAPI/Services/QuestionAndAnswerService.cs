@@ -31,7 +31,7 @@ namespace QuestionsAndAnswersWebAPI.Services
                     Option2 = f.Option2,
                     Option3 = f.Option3,
                     Option4 = f.Option4
-                });
+                }).ToList();
             return data;
         }
 
@@ -53,7 +53,7 @@ namespace QuestionsAndAnswersWebAPI.Services
                     Option2 = f.Option2,
                     Option3 = f.Option3,
                     Option4 = f.Option4,                   
-                });
+                }).ToList();
             return technologyModel;
         }        
 

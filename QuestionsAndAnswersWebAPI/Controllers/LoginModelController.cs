@@ -38,11 +38,7 @@ namespace QuestionsAndAnswersWebAPI.Controllers
                 var item = _service.ValidateUserLogin(loginModel);
                 if (item != null)
                 {
-                    return Ok(new
-                    {
-                        StatusCode = 200,
-                        Message = "Logged in successfully"
-                    });
+                    return Ok(item);
                 }
                 else
                 {
