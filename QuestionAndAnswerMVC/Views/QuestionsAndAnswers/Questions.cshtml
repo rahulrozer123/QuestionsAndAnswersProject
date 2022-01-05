@@ -15,29 +15,31 @@
             <h4>Questions</h4>
             <hr />
             <div class="col-md-10">
+                @{int i = 1; }
                 @foreach (var item in Model)
                 {
-                    <br />                    
-                    @item.QuestionID @Html.Label("Question",item.Question , new {id = item.QuestionID })
                     <br />
-                    @Html.RadioButton("Option1",item.Option1, new { id = item.Option1 })@item.Option1
+                    @Html.Label("QuestionID", item.QuestionID.ToString(), new { id = item.QuestionID })@item.Question
                     <br />
-                    @Html.RadioButton("Option2" ,item.Option2, new { id = item.Option2 })@item.Option2
+                    @Html.RadioButton("Option" + i, item.Option1, new { id = item.Option1 })@item.Option1
                     <br />
-                    @Html.RadioButton("Option3",item.Option3, new { id = item.Option3 })@item.Option3
-                    <br/>
-                    @Html.RadioButton("Option4",item.Option4, new { id = item.Option4 })@item.Option4
+                    @Html.RadioButton("Option" + i, item.Option2, new { id = item.Option2 })@item.Option2
+                    <br />
+                    @Html.RadioButton("Option" + i, item.Option3, new { id = item.Option3 })@item.Option3
+                    <br />
+                    @Html.RadioButton("Option" + i, item.Option4, new { id = item.Option4 })@item.Option4
                     <br>
+                    { i += 1; }
                 }
                 <br />
-            </div>            
-        </div>
-        <br />        
-        
-            <div class="k-action-button col-md-10">
-                <button class="btn btn-primary" type="submit" id="questionsSubmit">Next</button>
             </div>
-        
+        </div>
+        <br />
+
+        <div class="k-action-button col-md-10">
+            <button class="btn btn-primary" type="submit" id="questionsSubmit">Next</button>
+        </div>
+
         <br />
     </div>
 }

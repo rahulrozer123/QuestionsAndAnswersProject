@@ -3,7 +3,7 @@
     ViewBag.Title = "GetTechnologies";
 }
 @if (Session["UserId"] != null)
-{    
+{
     <h4 style="text-align:right">UserId @Session["UserId"]</h4>
 }
 @using (Html.BeginForm("GetTechnologies", "QuestionsAndAnswers", FormMethod.Post))
@@ -15,8 +15,9 @@
             <hr />
             <div class="col-md-10">
                 @foreach (var item in Model)
-                {                    
-                    @Html.RadioButton("TechnologyId",item.TechnologyId, new { id = item.TechnologyId })@item.TechnologyName                    
+                {
+                    @*@Html.RadioButton("TechnologyId",item.TechnologyId, new { id = item.TechnologyId })@item.TechnologyName*@                    
+                    @(Html.Kendo().RadioButton().Name("TechnologyId").Value(item.TechnologyId))@item.TechnologyName                    
                 }
             </div>
             <br />
