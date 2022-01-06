@@ -52,7 +52,8 @@ namespace QuestionsAndAnswersWebAPI.Services
                     Option1 = f.Option1,
                     Option2 = f.Option2,
                     Option3 = f.Option3,
-                    Option4 = f.Option4,                   
+                    Option4 = f.Option4,
+                    ActualAnswer = f.ActualAnswer
                 }).ToList();
             return technologyModel;
         }        

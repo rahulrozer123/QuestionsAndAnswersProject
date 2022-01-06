@@ -45,7 +45,7 @@ namespace QuestionAndAnswerMVC.Controllers
             if (Session["username"] != null)
             {
                 IEnumerable<QuestionsandAnswersViewModel> questions = null;
-                var readdata = client.GetAsync(client.BaseAddress +"QuestionsAndAnswersModels/" + technologyId).Result;            
+                var readdata = client.GetAsync(client.BaseAddress + "QuestionsAndAnswersModels/" + technologyId).Result;
                 if (readdata.IsSuccessStatusCode)
                 {
                     var consmedata = readdata.Content.ReadAsAsync<IList<QuestionsandAnswersViewModel>>();
@@ -53,13 +53,23 @@ namespace QuestionAndAnswerMVC.Controllers
                     questions = consmedata.Result;
                     return View(questions);
                 }
+                //CommonViewModel model = new CommonViewModel();
+                //model.listQuestions = null;
+                //var readdata = client.GetAsync(client.BaseAddress + "QuestionsAndAnswersModels/" + technologyId).Result;
+                //if (readdata.IsSuccessStatusCode)
+                //{
+                //    var consmedata = readdata.Content.ReadAsAsync<IList<QuestionsandAnswersViewModel>>();
+                //    consmedata.Wait();
+                //    model.listQuestions = consmedata.Result;
+                //    return View(model);
+                //}
             }
             return RedirectToAction("Login", "Registration");
         }
-        [HttpPost]
-        public ActionResult Questions(AnswersViewModel answers)
-        {
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult Questions(QuestionsandAnswersViewModel questions)
+        //{
+        //    return View();
+        //}
     }
 }
