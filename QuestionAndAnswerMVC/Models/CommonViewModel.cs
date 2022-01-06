@@ -11,6 +11,8 @@ namespace QuestionAndAnswerMVC.Models
 
         public IEnumerable<QuestionsandAnswersViewModel> listQuestions { get; set; }
 
+        public string selectedAnswer { get; set; }
+
         //public IEnumerable<AnswersViewModel> listAnswers { get; set; }        
     }
 }

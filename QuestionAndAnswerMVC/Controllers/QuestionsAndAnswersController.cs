@@ -53,23 +53,25 @@ namespace QuestionAndAnswerMVC.Controllers
                     questions = consmedata.Result;
                     return View(questions);
                 }
-                //CommonViewModel model = new CommonViewModel();
-                //model.listQuestions = null;
+                //IEnumerable<QuestionsandAnswersViewModel> questions = null;                                
                 //var readdata = client.GetAsync(client.BaseAddress + "QuestionsAndAnswersModels/" + technologyId).Result;
                 //if (readdata.IsSuccessStatusCode)
                 //{
                 //    var consmedata = readdata.Content.ReadAsAsync<IList<QuestionsandAnswersViewModel>>();
                 //    consmedata.Wait();
-                //    model.listQuestions = consmedata.Result;
+                //    questions = consmedata.Result;
+                //    CommonViewModel model = new CommonViewModel();
+                //    model.listQuestions = questions;
+                //    model.selectedAnswer = string.Empty;
                 //    return View(model);
                 //}
             }
             return RedirectToAction("Login", "Registration");
         }
-        //[HttpPost]
-        //public ActionResult Questions(QuestionsandAnswersViewModel questions)
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public ActionResult Questions(CommonViewModel questions)
+        {
+            return View();
+        }
     }
 }
