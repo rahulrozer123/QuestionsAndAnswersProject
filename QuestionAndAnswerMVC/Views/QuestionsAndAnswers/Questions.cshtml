@@ -7,56 +7,45 @@
     {
         <h4 style="text-align:right">Welcome @Session["username"].ToString()</h4>
     }*@
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal" id="questionsControl">
-        <div class="demo-section k-content">
-            <h4>Questions</h4>
-            <hr />
-            <div class="col-md-10">
-                <div>
-                    @foreach (var item in Model)
-                    {
-                        <div>
-                            @Html.DisplayFor(modelItem => item.QuestionID) ) @Html.DisplayFor(modelItem => item.Question)
-                        </div>                        
-                        <div>
-                            <input type="radio" id="option1" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option1)" />
-                            @Html.DisplayFor(modelItem => item.Option1)
-                        </div>
-                        <div>
-                            <input type="radio" id="option2" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option2)" />
-                            @Html.DisplayFor(modelItem => item.Option2)
-                        </div>
-                        <div>
-                            <input type="radio" id="option3" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option3)" />
-                            @Html.DisplayFor(modelItem => item.Option3)
-                        </div>
-                        <div>
-                            <input type="radio" id="option4" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option4)" />
-                            @Html.DisplayFor(modelItem => item.Option4)
-                        </div>
-                        <br />
-                        <div>
-                            <div>
-                                <label id="correctAnswer" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio-label" style="display:none;color:forestgreen"><b>@Html.DisplayFor(modelItem => item.ActualAnswer)</b></label>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-        <br />
 
-        <div class="k-action-button col-md-10">
-            <button class="btn btn-success" type="submit" id="questionsSubmit" onclick="displayresults();">Submit</button>
-        </div>
-        <br />
-        <br />
-        <label id="userAnswers"></label>
-    </div>
-}
+<h4>Questions</h4>
+<hr />
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionID) ) @Html.DisplayFor(modelItem => item.Question)
+                </td>
+                <td>
+                    <input type="radio" id="option1" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option1)" />
+                    @Html.DisplayFor(modelItem => item.Option1)
+                    <input type="radio" id="option2" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option2)" />
+                    @Html.DisplayFor(modelItem => item.Option2)
+                    <input type="radio" id="option3" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option3)" />
+                    @Html.DisplayFor(modelItem => item.Option3)
+                    <input type="radio" id="option4" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option4)" />
+                    @Html.DisplayFor(modelItem => item.Option4)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="correctAnswer" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio-label" style="display:none;color:forestgreen"><b>@Html.DisplayFor(modelItem => item.ActualAnswer)</b></label>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+<div class="k-action-button col-md-10">
+    <button class="btn btn-success" type="submit" id="questionsSubmit" onclick="displayresults();">Submit</button>
+</div>
+<br />
+<br />
+<label id="userAnswers"></label>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>

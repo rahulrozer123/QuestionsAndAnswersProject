@@ -72,7 +72,7 @@ namespace QuestionAndAnswerMVC.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles="Admin")]
         public ActionResult GetAllRegistrations()
         {
             List<RegistrationViewModel> modelList = new List<RegistrationViewModel>();

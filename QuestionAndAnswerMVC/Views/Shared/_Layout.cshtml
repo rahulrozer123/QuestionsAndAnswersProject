@@ -40,19 +40,18 @@
                 <ul class="nav navbar-nav">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("All Registered Users", "GetAllRegistrations", "Registration")</li>
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("All Registered Users", "GetAllRegistrations", "Registration")</li>
+                        }
 
                         <li>@Html.ActionLink("Login Form", "Login", "Registration")</li>
-                        <li>@Html.ActionLink("Registration Form", "Index", "Registration")</li>                        
+                        <li>@Html.ActionLink("Registration Form", "Index", "Registration")</li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-center text-uppercase" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @User.Identity.Name
-                            </a>
-                            @*<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">My Account</a>
-                                    <a class="dropdown-item" href="#">Edit Profile</a>
-                                    <div class="dropdown-divider"></div>
-                            </div>*@
+                            </a>                            
                         </li>
                         <li>@Html.ActionLink("Logout", "Logout", "Registration")</li>
                     }
