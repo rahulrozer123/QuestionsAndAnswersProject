@@ -18,6 +18,24 @@ namespace QuestionAndAnswerMVC.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
         }
+
+        [Authorize(Roles ="Admin")]
+        public ActionResult GetAllQuestions()
+        {
+            if(Session["UserId"]!=null)
+            {
+                IEnumerable<QuestionsandAnswersViewModel> allQuestions = null;
+                var readdata = client.GetAsync(client.BaseAddress + "QuestionsAndAnswersModels/Get all the questions and options").Result;
+                if (readdata.IsSuccessStatusCode)
+                {
+                    var consmedata = readdata.Content.ReadAsAsync<IList<QuestionsandAnswersViewModel>>();
+                    consmedata.Wait();
+                    allQuestions = consmedata.Result;
+                    return View(allQuestions);
+                }
+            }
+            return RedirectToAction("Login", "Registration");
+        }
         public ActionResult GetTechnologies()
         {            
             if (Session["UserId"] != null)

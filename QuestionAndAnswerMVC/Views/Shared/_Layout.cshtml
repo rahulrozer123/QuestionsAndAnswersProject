@@ -43,6 +43,7 @@
                         if (User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("All Registered Users", "GetAllRegistrations", "Registration")</li>
+                            <li>@Html.ActionLink("All Questions", "GetAllQuestions", "QuestionsAndAnswers")</li>
                         }
 
                         <li>@Html.ActionLink("Login Form", "Login", "Registration")</li>
