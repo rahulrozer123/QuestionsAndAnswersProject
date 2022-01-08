@@ -12,24 +12,25 @@ namespace QuestionAndAnswerMVC
     using System;
     using System.Collections.Generic;
     
-    public partial class UserRegistration
+    public partial class QuestionandAnswer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserRegistration()
+        public QuestionandAnswer()
         {
             this.Answers = new HashSet<Answer>();
         }
     
-        public int UserId { get; set; }
-        public Nullable<int> RoleId { get; set; }
-        public string Username { get; set; }
-        public string Pwd { get; set; }
-        public string Confirmpassword { get; set; }
-        public string Email { get; set; }
-        public Nullable<int> YearsOfExperience { get; set; }
-        public string Technology { get; set; }
+        public int QuestionID { get; set; }
+        public Nullable<int> TechnologyID { get; set; }
+        public string Question { get; set; }
+        public string Option1 { get; set; }
+        public string Option2 { get; set; }
+        public string Option3 { get; set; }
+        public string Option4 { get; set; }
+        public string ActualAnswer { get; set; }
     
-        public virtual Role Role { get; set; }        
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answer> Answers { get; set; }
+        public virtual MasterTechnology MasterTechnology { get; set; }
     }
 }

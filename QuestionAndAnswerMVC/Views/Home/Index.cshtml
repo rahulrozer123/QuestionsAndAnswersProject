@@ -2,30 +2,33 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div>
+    <div class="col-lg" style="background-color: #E5E7E9; color: blueviolet; border: groove; ">
+        <div class="col-lg-offset-0">
+            <div class="k-col-end-10" style="font-size: x-large; opacity: 0.7;text-align:center">
+                <div>
+                    <img src="~/fonts/images/Registration.png" alt="Smiley face" width="32" height="32" style="border:1px solid black;border-radius: 8px;" />
+                    @Html.ActionLink("Registration Form", "Index", "Registration")
+                </div>
+                <hr />
+                <div>
+                    <img src="~/fonts/images/user.png" alt="Login form" width="32" height="32" style="border:1px solid black;border-radius: 8px;" />
+                    @Html.ActionLink("Login Form", "Login", "Registration")
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center; opacity: 0.4;">
+        <h1 style="font-size: 30px; margin: 0 0 0 50px; color: #00ace6;">
+            Welcome..! to Online Quiz Application
+        </h1>
+        <br />
+        <h2 style="font-size:30px; margin:0 50px 0 0; text-align:center; color:#73e600;">
+            Stay Home.. Stay Safe.!
+        </h2>
+    </div>
+    <div style="background-image: url('~/fonts/images/PngItem_1683771.png'); opacity: 0.6; ">
+        <img src="~/fonts/images/PngItem_1683771.png" />
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

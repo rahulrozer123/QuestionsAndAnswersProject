@@ -27,5 +27,8 @@ namespace QuestionAndAnswerMVC
     
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<UserRegistration> UserRegistrations { get; set; }
+        public virtual DbSet<Answer> Answers { get; set; }
+        public virtual DbSet<MasterTechnology> MasterTechnologies { get; set; }
+        public virtual DbSet<QuestionandAnswer> QuestionandAnswers { get; set; }
     }
 }

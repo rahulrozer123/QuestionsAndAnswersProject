@@ -4,7 +4,38 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QuestionsAndAnswersDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QuestionsAndAnswersDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="AnswersID" />
+          </Key>
+          <Property Name="AnswersID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceivedAnswers" Type="nvarchar(max)" />
+          <Property Name="Result" Type="bit" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="TechnologyID" Type="int" />
+          <Property Name="QuestionID" Type="int" />
+        </EntityType>
+        <EntityType Name="MasterTechnology">
+          <Key>
+            <PropertyRef Name="TechnologyID" />
+          </Key>
+          <Property Name="TechnologyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TechnologyName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="QuestionandAnswer">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TechnologyID" Type="int" />
+          <Property Name="Question" Type="nvarchar(max)" />
+          <Property Name="Option1" Type="nvarchar(max)" />
+          <Property Name="Option2" Type="nvarchar(max)" />
+          <Property Name="Option3" Type="nvarchar(max)" />
+          <Property Name="Option4" Type="nvarchar(max)" />
+          <Property Name="ActualAnswer" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="RoleId" />
@@ -25,6 +56,60 @@
           <Property Name="YearsOfExperience" Type="int" />
           <Property Name="Technology" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <Association Name="FK__Answers__Questio__38996AB5">
+          <End Role="QuestionandAnswer" Type="Self.QuestionandAnswer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionandAnswer">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Answers__Technol__37A5467C">
+          <End Role="MasterTechnology" Type="Self.MasterTechnology" Multiplicity="0..1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterTechnology">
+              <PropertyRef Name="TechnologyID" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="TechnologyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Answers__UserId__36B12243">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Questiona__Techn__2B3F6F97">
+          <End Role="MasterTechnology" Type="Self.MasterTechnology" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="QuestionandAnswer" Type="Self.QuestionandAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterTechnology">
+              <PropertyRef Name="TechnologyID" />
+            </Principal>
+            <Dependent Role="QuestionandAnswer">
+              <PropertyRef Name="TechnologyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UserRegis__RoleI__267ABA7A">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -40,15 +125,33 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="QuestionsAndAnswersDBModelStoreContainer">
+          <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MasterTechnology" EntityType="Self.MasterTechnology" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionandAnswer" EntityType="Self.QuestionandAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Answers__Questio__38996AB5" Association="Self.FK__Answers__Questio__38996AB5">
+            <End Role="QuestionandAnswer" EntitySet="QuestionandAnswer" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Answers__Technol__37A5467C" Association="Self.FK__Answers__Technol__37A5467C">
+            <End Role="MasterTechnology" EntitySet="MasterTechnology" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Answers__UserId__36B12243" Association="Self.FK__Answers__UserId__36B12243">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Questiona__Techn__2B3F6F97" Association="Self.FK__Questiona__Techn__2B3F6F97">
+            <End Role="MasterTechnology" EntitySet="MasterTechnology" />
+            <End Role="QuestionandAnswer" EntitySet="QuestionandAnswer" />
+          </AssociationSet>
           <AssociationSet Name="FK__UserRegis__RoleI__267ABA7A" Association="Self.FK__UserRegis__RoleI__267ABA7A">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRegistration" EntitySet="UserRegistration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QuestionsAndAnswersDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -73,6 +176,7 @@
           <Property Name="YearsOfExperience" Type="Int32" />
           <Property Name="Technology" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Role" Relationship="Self.FK__UserRegis__RoleI__267ABA7A" FromRole="UserRegistration" ToRole="Roles" />
+          <NavigationProperty Name="Answers" Relationship="QuestionsAndAnswersDBModel.FK__Answers__UserId__36B12243" FromRole="UserRegistration" ToRole="Answer" />
         </EntityType>
         <Association Name="FK__UserRegis__RoleI__267ABA7A">
           <End Role="Roles" Type="Self.Role" Multiplicity="0..1">
@@ -95,7 +199,118 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRegistration" EntitySet="UserRegistrations" />
           </AssociationSet>
+          <EntitySet Name="Answers" EntityType="QuestionsAndAnswersDBModel.Answer" />
+          <EntitySet Name="MasterTechnologies" EntityType="QuestionsAndAnswersDBModel.MasterTechnology" />
+          <EntitySet Name="QuestionandAnswers" EntityType="QuestionsAndAnswersDBModel.QuestionandAnswer" />
+          <AssociationSet Name="FK__Answers__Questio__38996AB5" Association="QuestionsAndAnswersDBModel.FK__Answers__Questio__38996AB5">
+            <End Role="QuestionandAnswer" EntitySet="QuestionandAnswers" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Answers__Technol__37A5467C" Association="QuestionsAndAnswersDBModel.FK__Answers__Technol__37A5467C">
+            <End Role="MasterTechnology" EntitySet="MasterTechnologies" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Answers__UserId__36B12243" Association="QuestionsAndAnswersDBModel.FK__Answers__UserId__36B12243">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Questiona__Techn__2B3F6F97" Association="QuestionsAndAnswersDBModel.FK__Questiona__Techn__2B3F6F97">
+            <End Role="MasterTechnology" EntitySet="MasterTechnologies" />
+            <End Role="QuestionandAnswer" EntitySet="QuestionandAnswers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswersID" />
+          </Key>
+          <Property Name="AnswersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceivedAnswers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Result" Type="Boolean" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="TechnologyID" Type="Int32" />
+          <Property Name="QuestionID" Type="Int32" />
+          <NavigationProperty Name="QuestionandAnswer" Relationship="QuestionsAndAnswersDBModel.FK__Answers__Questio__38996AB5" FromRole="Answer" ToRole="QuestionandAnswer" />
+          <NavigationProperty Name="MasterTechnology" Relationship="QuestionsAndAnswersDBModel.FK__Answers__Technol__37A5467C" FromRole="Answer" ToRole="MasterTechnology" />
+          <NavigationProperty Name="UserRegistration" Relationship="QuestionsAndAnswersDBModel.FK__Answers__UserId__36B12243" FromRole="Answer" ToRole="UserRegistration" />
+        </EntityType>
+        <EntityType Name="MasterTechnology">
+          <Key>
+            <PropertyRef Name="TechnologyID" />
+          </Key>
+          <Property Name="TechnologyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TechnologyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Answers" Relationship="QuestionsAndAnswersDBModel.FK__Answers__Technol__37A5467C" FromRole="MasterTechnology" ToRole="Answer" />
+          <NavigationProperty Name="QuestionandAnswers" Relationship="QuestionsAndAnswersDBModel.FK__Questiona__Techn__2B3F6F97" FromRole="MasterTechnology" ToRole="QuestionandAnswer" />
+        </EntityType>
+        <EntityType Name="QuestionandAnswer">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TechnologyID" Type="Int32" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Option1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Option2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Option3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Option4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActualAnswer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Answers" Relationship="QuestionsAndAnswersDBModel.FK__Answers__Questio__38996AB5" FromRole="QuestionandAnswer" ToRole="Answer" />
+          <NavigationProperty Name="MasterTechnology" Relationship="QuestionsAndAnswersDBModel.FK__Questiona__Techn__2B3F6F97" FromRole="QuestionandAnswer" ToRole="MasterTechnology" />
+        </EntityType>
+        <Association Name="FK__Answers__Questio__38996AB5">
+          <End Type="QuestionsAndAnswersDBModel.QuestionandAnswer" Role="QuestionandAnswer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="QuestionsAndAnswersDBModel.Answer" Role="Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionandAnswer">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Answers__Technol__37A5467C">
+          <End Type="QuestionsAndAnswersDBModel.MasterTechnology" Role="MasterTechnology" Multiplicity="0..1" />
+          <End Type="QuestionsAndAnswersDBModel.Answer" Role="Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterTechnology">
+              <PropertyRef Name="TechnologyID" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="TechnologyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Answers__UserId__36B12243">
+          <End Type="QuestionsAndAnswersDBModel.UserRegistration" Role="UserRegistration" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="QuestionsAndAnswersDBModel.Answer" Role="Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Questiona__Techn__2B3F6F97">
+          <End Type="QuestionsAndAnswersDBModel.MasterTechnology" Role="MasterTechnology" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="QuestionsAndAnswersDBModel.QuestionandAnswer" Role="QuestionandAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterTechnology">
+              <PropertyRef Name="TechnologyID" />
+            </Principal>
+            <Dependent Role="QuestionandAnswer">
+              <PropertyRef Name="TechnologyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -121,6 +336,40 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="YearsOfExperience" ColumnName="YearsOfExperience" />
                 <ScalarProperty Name="Technology" ColumnName="Technology" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="QuestionsAndAnswersDBModel.Answer">
+              <MappingFragment StoreEntitySet="Answers">
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="TechnologyID" ColumnName="TechnologyID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="ReceivedAnswers" ColumnName="ReceivedAnswers" />
+                <ScalarProperty Name="AnswersID" ColumnName="AnswersID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MasterTechnologies">
+            <EntityTypeMapping TypeName="QuestionsAndAnswersDBModel.MasterTechnology">
+              <MappingFragment StoreEntitySet="MasterTechnology">
+                <ScalarProperty Name="TechnologyName" ColumnName="TechnologyName" />
+                <ScalarProperty Name="TechnologyID" ColumnName="TechnologyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionandAnswers">
+            <EntityTypeMapping TypeName="QuestionsAndAnswersDBModel.QuestionandAnswer">
+              <MappingFragment StoreEntitySet="QuestionandAnswer">
+                <ScalarProperty Name="ActualAnswer" ColumnName="ActualAnswer" />
+                <ScalarProperty Name="Option4" ColumnName="Option4" />
+                <ScalarProperty Name="Option3" ColumnName="Option3" />
+                <ScalarProperty Name="Option2" ColumnName="Option2" />
+                <ScalarProperty Name="Option1" ColumnName="Option1" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="TechnologyID" ColumnName="TechnologyID" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
