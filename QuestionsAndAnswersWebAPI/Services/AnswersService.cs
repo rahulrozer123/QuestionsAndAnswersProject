@@ -25,7 +25,7 @@ namespace QuestionsAndAnswersWebAPI.Services
             var all_keys = answersModel.qanda.Keys;
             foreach(string x in all_keys) {
                 string val = answersModel.qanda[x];
-                
+
                 _context.GetAnswers(new Answers()
                 {
                     ReceivedAnswers = val,
@@ -34,17 +34,17 @@ namespace QuestionsAndAnswersWebAPI.Services
                     Result = GetResult(int.Parse(x), val),
                     TechnologyId = GetTechnologyId(int.Parse(x)),
                 });
-            }            
+            }
 
             //Old code which used to save only 1 user responses
             //_context.GetAnswers(new Answers()
             //{
             //    ReceivedAnswers = answersModel.ReceivedAnswers,
             //    QuestionId = answersModel.QuestionID,
-            //    UserId = answersModel.UserId,                
-            //    Result = GetResult(answersModel),
-            //    TechnologyId = answersModel.TechnologyId,
-            //});                                             
+            //    UserId = answersModel.UserId,
+            //    Result = GetResult(answersModel.QuestionID, answersModel.ReceivedAnswers),
+            //    TechnologyId = GetTechnologyId(answersModel.QuestionID),
+            //});
             return answersModel;
         }
         

@@ -10,8 +10,8 @@ namespace QuestionAndAnswerMVC.Models
     {
         [Key]
         public int AnswerID { get; set; }
-        //public int QuestionID { get; set; }
-        //public string ReceivedAnswers { get; set; }       
+        public int QuestionID { get; set; }
+        public string ReceivedAnswers { get; set; }       
         public int UserId { get; set; }
         //public int TechnologyId { get; set; }
         //This will store the list of questions and answers which the user will be giving

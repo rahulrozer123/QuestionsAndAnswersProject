@@ -3,40 +3,76 @@
     ViewBag.Title = "Questions";
 }
 
-@*@if (Session["username"] != null)
+@*@using (Html.BeginForm("Questions", "QuestionsAndAnswers", FormMethod.Post))
+{
+    <h4>Questions</h4>
+    <hr />
+    if (Model != null)
     {
-        <h4 style="text-align:right">Welcome @Session["username"].ToString()</h4>
-    }*@
+        for (int i = 0; i < @Model.Count(); i++)
+        {            
+            <div>
+                <label>@Model.ElementAt(i).QuestionID )</label>
+                <input type="hidden" name="[@i].QuestionID" value="@Model.ElementAt(i).QuestionID" id="@Model.ElementAt(i).QuestionID" />
+                <label id="@Model.ElementAt(i).QuestionID" value="@Model.ElementAt(i).Question" name="@Model.ElementAt(i).Question">@Model.ElementAt(i).Question</label>
+            </div>
+
+            <div id="'lbl'+@i+@Model.ElementAt(i).Option1" name="lblOption1">@Model.ElementAt(i).Option1</div>
+            <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option1" name="[@i].Answers.ReceivedAnswers" />
+
+            <div id="'lbl'+@i+@Model.ElementAt(i).Option2" name="lblOption2">@Model.ElementAt(i).Option2</div>
+            <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option2" name="[@i].Answers.ReceivedAnswers" />
+
+            <div id="'lbl'+@i+@Model.ElementAt(i).Option3" name="lblOption3">@Model.ElementAt(i).Option3</div>
+            <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option3" name="[@i].Answers.ReceivedAnswers" />
+
+            <div id="'lbl'+@i+@Model.ElementAt(i).Option4" name="lblOption4">@Model.ElementAt(i).Option4</div>
+            <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option4" name="[@i].Answers.ReceivedAnswers" />
+            <br />
+        }
+        <div class="k-action-button col-md-10">
+            <button class="btn btn-success" type="submit" id="questionsSubmit">Submit</button>
+        </div>
+    }
+}*@
+
+
+@*@if (Session["username"] != null)
+{
+    <h4 style="text-align:right">Welcome @Session["username"].ToString()</h4>
+}*@
 
 <h4>Questions</h4>
 <hr />
-<table class="table">
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuestionID) ) @Html.DisplayFor(modelItem => item.Question)
-                </td>
-                <td>
-                    <input type="radio" id="option1" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option1)" />
-                    @Html.DisplayFor(modelItem => item.Option1)
-                    <input type="radio" id="option2" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option2)" />
-                    @Html.DisplayFor(modelItem => item.Option2)
-                    <input type="radio" id="option3" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option3)" />
-                    @Html.DisplayFor(modelItem => item.Option3)
-                    <input type="radio" id="option4" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option4)" />
-                    @Html.DisplayFor(modelItem => item.Option4)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label id="correctAnswer" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio-label" style="display:none;color:forestgreen"><b>@Html.DisplayFor(modelItem => item.ActualAnswer)</b></label>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="table">
+
+    @foreach (var item in Model)
+    {
+        <div>
+            <div>
+                @Html.DisplayFor(modelItem => item.QuestionID) ) @Html.DisplayFor(modelItem => item.Question)
+
+            </div>
+            <div>
+                <input type="radio" id="option1" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option1)" />
+                @Html.DisplayFor(modelItem => item.Option1)
+                <input type="radio" id="option2" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option2)" />
+                @Html.DisplayFor(modelItem => item.Option2)
+                <input type="radio" id="option3" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option3)" />
+                @Html.DisplayFor(modelItem => item.Option3)
+                <input type="radio" id="option4" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio" value="@Html.DisplayFor(modelItem => item.Option4)" />
+                @Html.DisplayFor(modelItem => item.Option4)
+            </div>
+            <br />
+        </div>
+        <div>
+            <div>
+                <label id="correctAnswer" name="@Html.DisplayFor(modelItem => item.QuestionID)" class="rb k-radio-label" style="display:none;color:forestgreen"><b>@Html.DisplayFor(modelItem => item.ActualAnswer)</b></label>
+            </div>
+        </div>
+    }
+
+</div>
 <br />
 
 <div class="k-action-button col-md-10">
@@ -44,6 +80,7 @@
 </div>
 <br />
 <br />
+    }
 <label id="userAnswers"></label>
 
 
@@ -67,3 +104,4 @@
         }
     }
 </script>
+

@@ -87,8 +87,21 @@ namespace QuestionAndAnswerMVC.Controllers
             return RedirectToAction("Login", "Registration");
         }
         [HttpPost]
-        public ActionResult Questions(CommonViewModel questions)
+        public ActionResult Questions(List<QuestionsandAnswersViewModel> model,FormCollection test)
         {
+            //List<AnswersViewModel> answers = new List<AnswersViewModel>();
+            //answers.Add(model);
+            ////answers.UserId = (int)Session["UserId"];
+            ////foreach(var item in model)
+            ////{
+            ////    answers.QuestionID = item.QuestionID;
+            ////    answers.ReceivedAnswers = item.Answers.ReceivedAnswers;
+            ////}            
+            //HttpResponseMessage response = client.PostAsJsonAsync("AnswersModel/GetAnswers", answers).Result;
+            //if (response.IsSuccessStatusCode)
+            //{                               
+            //    var data = response.Content.ReadAsStringAsync().Result;                               
+            //}
             return View();
         }
     }

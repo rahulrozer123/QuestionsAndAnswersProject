@@ -23,7 +23,8 @@ namespace QuestionsAndAnswersWebAPI.Controllers
             _service = service;
         }
 
-        [HttpPost]        
+        [HttpPost]
+        [Route("GetAnswers")]
         //Used to add data to db
         public IActionResult GetAnswersFromUser([FromBody] AnswersModel answersModel)
         {
