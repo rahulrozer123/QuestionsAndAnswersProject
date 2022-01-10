@@ -3,7 +3,7 @@
     ViewBag.Title = "Questions";
 }
 
-@*@using (Html.BeginForm("Questions", "QuestionsAndAnswers", FormMethod.Post))
+@using (Html.BeginForm("Questions", "QuestionsAndAnswers", FormMethod.Post))
 {
     <h4>Questions</h4>
     <hr />
@@ -17,24 +17,32 @@
                 <label id="@Model.ElementAt(i).QuestionID" value="@Model.ElementAt(i).Question" name="@Model.ElementAt(i).Question">@Model.ElementAt(i).Question</label>
             </div>
 
-            <div id="'lbl'+@i+@Model.ElementAt(i).Option1" name="lblOption1">@Model.ElementAt(i).Option1</div>
-            <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option1" name="[@i].Answers.ReceivedAnswers" />
+            <div>
+                <div id="'lbl'+@i+@Model.ElementAt(i).Option1" name="lblOption1">@Model.ElementAt(i).Option1</div>
+                <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option1" name="[@i].Answers.ReceivedAnswers" />
+            </div>
 
-            <div id="'lbl'+@i+@Model.ElementAt(i).Option2" name="lblOption2">@Model.ElementAt(i).Option2</div>
-            <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option2" name="[@i].Answers.ReceivedAnswers" />
+            <div>
+                <div id="'lbl'+@i+@Model.ElementAt(i).Option2" name="lblOption2">@Model.ElementAt(i).Option2</div>
+                <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option2" name="[@i].Answers.ReceivedAnswers" />
+            </div>
 
-            <div id="'lbl'+@i+@Model.ElementAt(i).Option3" name="lblOption3">@Model.ElementAt(i).Option3</div>
-            <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option3" name="[@i].Answers.ReceivedAnswers" />
+            <div>
+                <div id="'lbl'+@i+@Model.ElementAt(i).Option3" name="lblOption3">@Model.ElementAt(i).Option3</div>
+                <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option3" name="[@i].Answers.ReceivedAnswers" />
+            </div>
 
-            <div id="'lbl'+@i+@Model.ElementAt(i).Option4" name="lblOption4">@Model.ElementAt(i).Option4</div>
-            <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option4" name="[@i].Answers.ReceivedAnswers" />
+            <div>
+                <div id="'lbl'+@i+@Model.ElementAt(i).Option4" name="lblOption4">@Model.ElementAt(i).Option4</div>
+                <input type="radio" class="k-radio" value="@Model.ElementAt(i).Option4" name="[@i].Answers.ReceivedAnswers" />
+            </div>
             <br />
         }
         <div class="k-action-button col-md-10">
             <button class="btn btn-success" type="submit" id="questionsSubmit">Submit</button>
         </div>
     }
-}*@
+}
 
 
 @*@if (Session["username"] != null)
@@ -42,7 +50,7 @@
     <h4 style="text-align:right">Welcome @Session["username"].ToString()</h4>
 }*@
 
-<h4>Questions</h4>
+@*<h4>Questions</h4>
 <hr />
 <div class="table">
 
@@ -103,5 +111,5 @@
             }
         }
     }
-</script>
+</script>*@
 

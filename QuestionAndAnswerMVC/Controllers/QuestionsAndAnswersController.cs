@@ -1,4 +1,5 @@
-﻿using QuestionAndAnswerMVC.Models;
+﻿using Kendo.Mvc.Extensions;
+using QuestionAndAnswerMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,19 +90,24 @@ namespace QuestionAndAnswerMVC.Controllers
         [HttpPost]
         public ActionResult Questions(List<QuestionsandAnswersViewModel> model,FormCollection test)
         {
-            //List<AnswersViewModel> answers = new List<AnswersViewModel>();
-            //answers.Add(model);
-            ////answers.UserId = (int)Session["UserId"];
-            ////foreach(var item in model)
-            ////{
-            ////    answers.QuestionID = item.QuestionID;
-            ////    answers.ReceivedAnswers = item.Answers.ReceivedAnswers;
-            ////}            
-            //HttpResponseMessage response = client.PostAsJsonAsync("AnswersModel/GetAnswers", answers).Result;
-            //if (response.IsSuccessStatusCode)
-            //{                               
-            //    var data = response.Content.ReadAsStringAsync().Result;                               
-            //}
+            AnswersViewModel answers = new AnswersViewModel();
+            HttpResponseMessage response = null;
+            answers.UserId = (int)Session["userid"];            
+            foreach (var item in model)
+            {
+                answers.QuestionID = item.QuestionID;
+                answers.ReceivedAnswers = item.Answers.ReceivedAnswers;
+                response = client.PostAsJsonAsync("AnswersModel/GetAnswers", answers).Result;
+            }
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Thankyou");
+            }
+            return View(model);
+        }
+
+        public ActionResult Thankyou()
+        {
             return View();
         }
     }
