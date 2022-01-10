@@ -41,17 +41,17 @@ namespace QuestionsAndAnswersWebAPITests.Controllers
             var items = Assert.IsType<List<QuestionsAndAnswersModel>>(okResult.Value);
             Assert.Equal(3, items.Count);
         }
-        [Fact]
-        public void GetByTechnologyId_UnknownTechnologyIdPassed_ReturnsNotFoundResult()
-        {
-            //Arrange
-            //var controller = new QuestionsAndAnswersModelsController(_service);
-            var testId = 6;
-            //Act
-            IActionResult notFoundResult = _controller.GetTechnologyModel(testId);
-            //Assert
-            Assert.IsType<NotFoundObjectResult>(notFoundResult);
-        }
+        //[Fact]
+        //public void GetByTechnologyId_UnknownTechnologyIdPassed_ReturnsNotFoundResult()
+        //{
+        //    //Arrange
+        //    //var controller = new QuestionsAndAnswersModelsController(_service);
+        //    var testId = 6;
+        //    //Act
+        //    IActionResult notFoundResult = _controller.GetTechnologyModel(testId);
+        //    //Assert
+        //    Assert.IsType<NotFoundObjectResult>(notFoundResult);
+        //}
         [Fact]
         public void GetByTechnologyId_ExistingIdPassed_ReturnsOkResult()
         {

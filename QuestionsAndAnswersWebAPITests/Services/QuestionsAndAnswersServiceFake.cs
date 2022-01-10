@@ -31,12 +31,11 @@ namespace QuestionsAndAnswersWebAPITests.Services
             return _questionsAndAnswers;
         }
 
-        public IEnumerable<QuestionsAndAnswersModel> GetQuestionsByTechnologyId(int technologyId)
+        public IEnumerable<QuestionsAndAnswersModel> GetQuestionsByTechnologyId(int questionId)
         {
                var data=_questionsAndAnswers
-                            .Where(a => a.QuestionID == technologyId).FirstOrDefault();
-            return (IEnumerable<QuestionsAndAnswersModel>)data;
-
+                            .Where(a => a.QuestionID == questionId).FirstOrDefault();
+            yield return data;
         }        
 
         public void Update(QuestionsAndAnswers questionsAndAnswersModel)
