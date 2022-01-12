@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using QuestionAndAnswerMVC.Logging;
 using QuestionAndAnswerMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -32,15 +33,22 @@ namespace QuestionAndAnswerMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(RegistrationViewModel register)
         {
-            HttpResponseMessage response = client.PostAsJsonAsync("RegistrationModels", register).Result;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                ViewData["Success Message"] = "Registration Successfull";
-                return RedirectToAction("Login");
+                HttpResponseMessage response = client.PostAsJsonAsync("RegistrationModels", register).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    ViewData["Success Message"] = "Registration Successfull";
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ViewData["Message"] = "Registration Attempt failed";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ViewData["Message"] = "Registration Attempt failed";
+                LogHelper.Default.WriteError(ex.Message, ex);
             }
             return View(register);            
             //return View();
@@ -54,20 +62,27 @@ namespace QuestionAndAnswerMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel login)
         {
-            LoginViewModel modelList = new LoginViewModel();
-            HttpResponseMessage response = client.PostAsJsonAsync("LoginModel/Loginmodule", login).Result;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                Session["username"] = login.UserName.ToString();
-                FormsAuthentication.SetAuthCookie(login.UserName, false);
-                var data=response.Content.ReadAsStringAsync().Result;
-                modelList = JsonConvert.DeserializeObject<LoginViewModel>(data);
-                Session["UserId"] = modelList.ID;                
-                return RedirectToAction("GetTechnologies", "QuestionsAndAnswers");
+                LoginViewModel modelList = new LoginViewModel();
+                HttpResponseMessage response = client.PostAsJsonAsync("LoginModel/Loginmodule", login).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    Session["username"] = login.UserName.ToString();
+                    FormsAuthentication.SetAuthCookie(login.UserName, false);
+                    var data = response.Content.ReadAsStringAsync().Result;
+                    modelList = JsonConvert.DeserializeObject<LoginViewModel>(data);
+                    Session["UserId"] = modelList.ID;
+                    return RedirectToAction("GetTechnologies", "QuestionsAndAnswers");
+                }
+                else
+                {
+                    ViewData["Message"] = "Login attempt failed";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ViewData["Message"] = "Login attempt failed";
+                LogHelper.Default.WriteError(ex.Message, ex);
             }
             return View();
         }
@@ -75,14 +90,22 @@ namespace QuestionAndAnswerMVC.Controllers
         [Authorize(Roles="Admin")]
         public ActionResult GetAllRegistrations()
         {
-            List<RegistrationViewModel> modelList = new List<RegistrationViewModel>();
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "RegistrationModels").Result;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string data = response.Content.ReadAsStringAsync().Result;
-                modelList = JsonConvert.DeserializeObject<List<RegistrationViewModel>>(data);
+                List<RegistrationViewModel> modelList = new List<RegistrationViewModel>();
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "RegistrationModels").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    modelList = JsonConvert.DeserializeObject<List<RegistrationViewModel>>(data);
+                }
+                return View(modelList);
             }
-            return View(modelList);
+            catch (Exception ex)
+            {
+                LogHelper.Default.WriteError(ex.Message, ex);
+            }
+            return View();
         }
         
         public ActionResult Logout()

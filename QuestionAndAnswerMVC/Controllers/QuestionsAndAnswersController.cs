@@ -1,5 +1,6 @@
 ﻿using Kendo.Mvc.Extensions;
 using Newtonsoft.Json;
+using QuestionAndAnswerMVC.Logging;
 using QuestionAndAnswerMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -20,53 +21,74 @@ namespace QuestionAndAnswerMVC.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
         }
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult GetAllQuestions()
         {
-            if(Session["UserId"]!=null)
+            try
             {
-                IEnumerable<QuestionsandAnswersViewModel> allQuestions = null;
-                var readdata = client.GetAsync(client.BaseAddress + "QuestionsAndAnswersModels/Get all the questions and options").Result;
-                if (readdata.IsSuccessStatusCode)
+                if (Session["UserId"] != null)
                 {
-                    var consmedata = readdata.Content.ReadAsAsync<IList<QuestionsandAnswersViewModel>>();
-                    consmedata.Wait();
-                    allQuestions = consmedata.Result;
-                    return View(allQuestions);
+                    IEnumerable<QuestionsandAnswersViewModel> allQuestions = null;
+                    var readdata = client.GetAsync(client.BaseAddress + "QuestionsAndAnswersModels/Get all the questions and options").Result;
+                    if (readdata.IsSuccessStatusCode)
+                    {
+                        var consmedata = readdata.Content.ReadAsAsync<IList<QuestionsandAnswersViewModel>>();
+                        consmedata.Wait();
+                        allQuestions = consmedata.Result;
+                        return View(allQuestions);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Default.WriteError(ex.Message, ex);
             }
             return RedirectToAction("Login", "Registration");
         }
 
         public ActionResult Search(int id)
         {
-            if(Session["UserId"]!=null)
+            try
             {
-                var answerResultlist = new List<AnswersViewModel>();
-                HttpResponseMessage response = client.GetAsync("AnswersModel/GetResult?id=" + id).Result;                
-                if (response.IsSuccessStatusCode)
+                if (Session["UserId"] != null)
                 {
-                    var consumeData = response.Content.ReadAsAsync<List<AnswersViewModel>>();
-                    consumeData.Wait();
-                    answerResultlist = consumeData.Result;
-                    return View(answerResultlist);
+                    var answerResultlist = new List<AnswersViewModel>();
+                    HttpResponseMessage response = client.GetAsync("AnswersModel/GetResult?id=" + id).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var consumeData = response.Content.ReadAsAsync<List<AnswersViewModel>>();
+                        consumeData.Wait();
+                        answerResultlist = consumeData.Result;
+                        return View(answerResultlist);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Default.WriteError(ex.Message, ex);
             }
             return RedirectToAction("Login", "Registration");
         }
         public ActionResult GetTechnologies()
-        {            
-            if (Session["UserId"] != null)
+        {
+            try
             {
-                IEnumerable<TechnologyViewModel> technologies = null;
-                var readdata = client.GetAsync(client.BaseAddress + "TechnologyModels").Result;
-                if (readdata.IsSuccessStatusCode)
+                if (Session["UserId"] != null)
                 {
-                    var consmedata = readdata.Content.ReadAsAsync<IList<TechnologyViewModel>>();
-                    consmedata.Wait();
-                    technologies = consmedata.Result;
-                    return View(technologies);
-                }                
+                    IEnumerable<TechnologyViewModel> technologies = null;
+                    var readdata = client.GetAsync(client.BaseAddress + "TechnologyModels").Result;
+                    if (readdata.IsSuccessStatusCode)
+                    {
+                        var consmedata = readdata.Content.ReadAsAsync<IList<TechnologyViewModel>>();
+                        consmedata.Wait();
+                        technologies = consmedata.Result;
+                        return View(technologies);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Default.WriteError(ex.Message, ex);
             }
             return RedirectToAction("Login", "Registration");
         }
@@ -78,47 +100,61 @@ namespace QuestionAndAnswerMVC.Controllers
 
         public ActionResult Questions(int technologyId)
         {
-            if (Session["username"] != null)
+            try
             {
-                IEnumerable<QuestionsandAnswersViewModel> questions = null;
-                var readdata = client.GetAsync(client.BaseAddress + "QuestionsAndAnswersModels/" + technologyId).Result;
-                if (readdata.IsSuccessStatusCode)
+                if (Session["username"] != null)
                 {
-                    var consmedata = readdata.Content.ReadAsAsync<IList<QuestionsandAnswersViewModel>>();
-                    consmedata.Wait();
-                    questions = consmedata.Result;
-                    return View(questions);
+                    IEnumerable<QuestionsandAnswersViewModel> questions = null;
+                    var readdata = client.GetAsync(client.BaseAddress + "QuestionsAndAnswersModels/" + technologyId).Result;
+                    if (readdata.IsSuccessStatusCode)
+                    {
+                        var consmedata = readdata.Content.ReadAsAsync<IList<QuestionsandAnswersViewModel>>();
+                        consmedata.Wait();
+                        questions = consmedata.Result;
+                        return View(questions);
+                    }
+                    //IEnumerable<QuestionsandAnswersViewModel> questions = null;                                
+                    //var readdata = client.GetAsync(client.BaseAddress + "QuestionsAndAnswersModels/" + technologyId).Result;
+                    //if (readdata.IsSuccessStatusCode)
+                    //{
+                    //    var consmedata = readdata.Content.ReadAsAsync<IList<QuestionsandAnswersViewModel>>();
+                    //    consmedata.Wait();
+                    //    questions = consmedata.Result;
+                    //    CommonViewModel model = new CommonViewModel();
+                    //    model.listQuestions = questions;
+                    //    model.selectedAnswer = string.Empty;
+                    //    return View(model);
+                    //}
                 }
-                //IEnumerable<QuestionsandAnswersViewModel> questions = null;                                
-                //var readdata = client.GetAsync(client.BaseAddress + "QuestionsAndAnswersModels/" + technologyId).Result;
-                //if (readdata.IsSuccessStatusCode)
-                //{
-                //    var consmedata = readdata.Content.ReadAsAsync<IList<QuestionsandAnswersViewModel>>();
-                //    consmedata.Wait();
-                //    questions = consmedata.Result;
-                //    CommonViewModel model = new CommonViewModel();
-                //    model.listQuestions = questions;
-                //    model.selectedAnswer = string.Empty;
-                //    return View(model);
-                //}
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Default.WriteError(ex.Message, ex);
             }
             return RedirectToAction("Login", "Registration");
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult Questions(List<QuestionsandAnswersViewModel> model,FormCollection test)
+        public ActionResult Questions(List<QuestionsandAnswersViewModel> model, FormCollection test)
         {
-            AnswersViewModel answers = new AnswersViewModel();
-            HttpResponseMessage response = null;
-            answers.UserId = (int)Session["userid"];            
-            foreach (var item in model)
+            try
             {
-                answers.QuestionID = item.QuestionID;
-                answers.ReceivedAnswers = item.Answers.ReceivedAnswers;
-                response = client.PostAsJsonAsync("AnswersModel/GetAnswers", answers).Result;
+                AnswersViewModel answers = new AnswersViewModel();
+                HttpResponseMessage response = null;
+                answers.UserId = (int)Session["userid"];
+                foreach (var item in model)
+                {
+                    answers.QuestionID = item.QuestionID;
+                    answers.ReceivedAnswers = item.Answers.ReceivedAnswers;
+                    response = client.PostAsJsonAsync("AnswersModel/GetAnswers", answers).Result;
+                }
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Thankyou");
+                }
             }
-            if (response.IsSuccessStatusCode)
+            catch (Exception ex)
             {
-                return RedirectToAction("Thankyou");
+                LogHelper.Default.WriteError(ex.Message, ex);
             }
             return View(model);
         }
