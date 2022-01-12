@@ -63,6 +63,17 @@ namespace QuestionsAndAnswersWebAPI.Services
             var entity = _Dbcontext.QuestionandAnswers.Where(e => e.QuestionID == questonId).FirstOrDefault();
             var technologyId = entity.TechnologyId;
             return technologyId;
-        }        
+        }
+
+        public IEnumerable<Answers> GetResultByUserId(int userid)
+        {
+            var result = _context.GetResultByUserId(userid)
+                .Select(f => new Answers
+                {
+                    QuestionId = f.QuestionId,
+                    Result = f.Result
+                }).ToList();
+            return result;
+        }
     }
 }

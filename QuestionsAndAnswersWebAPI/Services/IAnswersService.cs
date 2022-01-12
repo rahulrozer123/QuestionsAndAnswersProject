@@ -10,5 +10,7 @@ namespace QuestionsAndAnswersWebAPI.Services
     public interface IAnswersService
     {
        AnswersModel GetAnswersGivenByUser(AnswersModel answers);
+
+       IEnumerable<Answers> GetResultByUserId(int userId);
     }
 }

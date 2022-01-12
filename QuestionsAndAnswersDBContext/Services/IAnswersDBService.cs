@@ -9,5 +9,7 @@ namespace QuestionsAndAnswersDBContext.Services
     public interface IAnswersDBService
     {
         public Answers GetAnswers(Answers answers);
+
+        public List<Answers> GetResultByUserId(int userId);
     }
 }

@@ -2996,6 +2996,7 @@
     <Content Include="Views\QuestionsAndAnswers\Questions.cshtml" />
     <Content Include="Views\QuestionsAndAnswers\GetAllQuestions.cshtml" />
     <Content Include="Views\QuestionsAndAnswers\Thankyou.cshtml" />
+    <Content Include="Views\QuestionsAndAnswers\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

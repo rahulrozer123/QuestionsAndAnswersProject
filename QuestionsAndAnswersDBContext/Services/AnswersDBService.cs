@@ -28,6 +28,19 @@ namespace QuestionsAndAnswersDBContext.Services
             });
             _Dbcontext.SaveChanges();
             return answers;
-        }        
+        }
+
+        public List<Answers> GetResultByUserId(int userId)
+        {
+            var result = _Dbcontext.Answers
+                .Where(f => f.UserId == userId)
+                .Select(f => new Answers
+                {
+                    TechnologyId = f.TechnologyId,
+                    QuestionId = f.QuestionId,
+                    Result = f.Result
+                }).ToList();
+            return result;
+        }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<QuestionAndAnswerMVC.Models.AnswersViewModel>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+<table class="table">
+    <tr>  
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Result)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr> 
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Result)
+        </td>        
+    </tr>
+}
+
+</table>

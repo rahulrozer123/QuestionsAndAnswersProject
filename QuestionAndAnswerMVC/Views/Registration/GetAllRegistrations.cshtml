@@ -16,6 +16,8 @@
                 columns.Bound(x => x.Email).Filterable(ftb => ftb.Multi(true));
                 columns.Bound(x => x.YearsOfExperience).Filterable(ftb => ftb.Multi(true));
                 columns.Bound(x => x.Technology).Filterable(ftb => ftb.Multi(true)).Filterable(ftb => ftb.Multi(true));
+                columns.Bound(x => x.UserId).Title("Result by UserId").ClientTemplate(
+                    @Html.ActionLink("Details","Search","QuestionsAndAnswers", new { id = "#=UserId#" }, htmlAttributes: null).ToHtmlString());
             })
                 .ToolBar(ToolBar =>
                 {                    

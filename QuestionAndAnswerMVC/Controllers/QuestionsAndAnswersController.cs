@@ -1,4 +1,5 @@
 ﻿using Kendo.Mvc.Extensions;
+using Newtonsoft.Json;
 using QuestionAndAnswerMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,6 @@ namespace QuestionAndAnswerMVC.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
         }
-
         [Authorize(Roles ="Admin")]
         public ActionResult GetAllQuestions()
         {
@@ -33,6 +33,23 @@ namespace QuestionAndAnswerMVC.Controllers
                     consmedata.Wait();
                     allQuestions = consmedata.Result;
                     return View(allQuestions);
+                }
+            }
+            return RedirectToAction("Login", "Registration");
+        }
+
+        public ActionResult Search(int id)
+        {
+            if(Session["UserId"]!=null)
+            {
+                var answerResultlist = new List<AnswersViewModel>();
+                HttpResponseMessage response = client.GetAsync("AnswersModel/GetResult?id=" + id).Result;                
+                if (response.IsSuccessStatusCode)
+                {
+                    var consumeData = response.Content.ReadAsAsync<List<AnswersViewModel>>();
+                    consumeData.Wait();
+                    answerResultlist = consumeData.Result;
+                    return View(answerResultlist);
                 }
             }
             return RedirectToAction("Login", "Registration");
@@ -87,7 +104,7 @@ namespace QuestionAndAnswerMVC.Controllers
             }
             return RedirectToAction("Login", "Registration");
         }
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult Questions(List<QuestionsandAnswersViewModel> model,FormCollection test)
         {
             AnswersViewModel answers = new AnswersViewModel();

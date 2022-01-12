@@ -40,5 +40,21 @@ namespace QuestionsAndAnswersWebAPI.Controllers
             }
             return Ok();
         }
+        [HttpGet]
+        [Route("GetResult")]
+        public IActionResult GetResult(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var item = _service.GetResultByUserId(id);
+            if (item.Count() == 0)
+            {
+                return NoContent();
+            }
+            return Ok(item);
+        }
     }
 }
