@@ -146,11 +146,11 @@ namespace QuestionAndAnswerMVC.Controllers
                     answers.QuestionID = item.QuestionID;
                     answers.ReceivedAnswers = item.Answers.ReceivedAnswers;
                     response = client.PostAsJsonAsync("AnswersModel/GetAnswers", answers).Result;
-                }
-                if (response.IsSuccessStatusCode)
-                {
-                    return RedirectToAction("Thankyou");
-                }
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Thankyou");
+                    }
+                }                
             }
             catch (Exception ex)
             {
