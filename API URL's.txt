@@ -1,0 +1,29 @@
+TechnologyModels
+--Get all the Technologies
+Request URL : https://localhost:44363/api/TechnologyModels
+Curl url : curl -X GET "https://localhost:44363/api/TechnologyModels" -H  "accept: */*"
+
+RegistrationModels
+--Get all the Registered Users
+Request URL: https://localhost:44363/api/RegistrationModels
+Curl URL: curl -X GET "https://localhost:44363/api/RegistrationModels" -H  "accept: */*"
+
+--Add new registration
+Request URL: https://localhost:44363/api/RegistrationModels
+Curl URL:-H  "accept: */*" -H  "Content-Type: application/json" -d "{\"username\":\"Radha\",\"email\":\"radha@gmail.com\",\"pwd\":\"radha\",\"confirmPassword\":\"radha\",\"yearsOfExperience\":4,\"technology\":\"Angular\"}"
+
+QuestionsAndAnswersModel
+--Get all the questions and answers
+Request URL:https://localhost:44363/api/QuestionsAndAnswersModels
+
+QuestionsAndAnswersModel by technology id
+Get questions by technology id
+Request URL :https://localhost:44363/api/QuestionsAndAnswersModels?id=4
+
+Answers Model
+Get the iputs from the user on the chosen asnwers
+Request URL:https://localhost:44363/api/AnswersModel
+Curl curl -X POST "https://localhost:44363/api/AnswersModel" -H  "accept: */*" -H  "Content-Type: application/json" -d "{\"userId\":2,\"qanda\":{\"11\":\"C\",\"12\":\"A\",\"13\":\"B\"}}"
+
+Login Model
+Request URL:https://localhost:44363/api/LoginModel
